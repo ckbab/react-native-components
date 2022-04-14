@@ -9,15 +9,7 @@
     "no-case-declarations": "off"
   },
   "globals": {
-    "FormData": true,
     "console": true,
-    "navigator": true,
-    "setTimeout": true,
-    "setInterval": true,
-    "clearTimeout": true,
-    "clearInterval": true,
-    "require": true,
-    "__DEV__": true
   },
   "env": {
     "es6": true
