@@ -16,12 +16,18 @@ export default function Flag({ code, size, style }) {
   };
 
   const getSvgComponent = () => {
-    const flagComponent = flags.find((item) => item.code === code);
+    const flagComponent = flags.find(
+      (item) => item.code === code?.toString()?.toUpperCase()
+    );
     return flagComponent?.component;
   };
 
   const SvgComponent = getSvgComponent();
   const { height, width } = getSize();
+
+  if (!SvgComponent) {
+    return null;
+  }
 
   return (
     <View style={style}>

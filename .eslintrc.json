@@ -9,7 +9,7 @@
     "no-case-declarations": "off"
   },
   "globals": {
-    "console": true,
+    "console": true
   },
   "env": {
     "es6": true
