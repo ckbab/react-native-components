@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-$ npm install @ckbab/react-native-components
+npm install @ckbab/react-native-components
 ```
 
 ## Basic Usage
