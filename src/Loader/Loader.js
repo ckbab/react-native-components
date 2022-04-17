@@ -5,7 +5,7 @@ import { StyleSheet, View } from "react-native";
 import LoaderDark from "./loader-dark.json";
 import LoaderLight from "./loader-light.json";
 
-export default function Loader({ type }) {
+export default function Loader({ style, type }) {
   const lottieRef = useRef(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Loader({ type }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.content}>
         <Lottie ref={lottieRef} source={source} />
       </View>
@@ -40,10 +40,12 @@ export default function Loader({ type }) {
 }
 
 Loader.propTypes = {
+  style: PropTypes.any,
   type: PropTypes.oneOf(["dark", "light"]),
 };
 
 Loader.defaultProps = {
+  style: {},
   type: "dark",
 };
 
