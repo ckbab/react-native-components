@@ -1,9 +1,14 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
+import ThemeContext from "../Theme/ThemeContext";
 
 export default function Dialog({ children, isOpen, onRequestClose, style }) {
+  const theme = useContext(ThemeContext);
+
+  const backgroundColor = theme.colors?.background || "#fff";
+
   return (
     <RNModal
       style={styles.container}
@@ -15,7 +20,7 @@ export default function Dialog({ children, isOpen, onRequestClose, style }) {
       onSwipeComplete={onRequestClose}
       propagateSwipe
     >
-      <View style={[styles.modal, style]}>{children}</View>
+      <View style={[styles.modal, { backgroundColor }, style]}>{children}</View>
     </RNModal>
   );
 }
@@ -40,7 +45,6 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   modal: {
-    backgroundColor: "#fff",
     margin: 32,
     padding: 16,
     borderRadius: 2,

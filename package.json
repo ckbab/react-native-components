@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "expo-application": "^4.0.2",
+    "expo-constants": "^13.0.2",
+    "expo-updates": "^0.11.6",
     "lottie-react-native": "^5.0.1",
-    "react-native-svg": "12.1.1"
+    "react-native-modal": "^12.1.0",
+    "react-native-svg": "^12.1.1"
   },
   "peerDependencies": {
     "react": "17.0.1",
