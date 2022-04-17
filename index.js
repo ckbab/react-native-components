@@ -1,3 +1,1 @@
-import { Flag } from "./src";
-
-export { Flag };
+export * from "./src";
