@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@ckbab/js-utils": "^1.0.0",
     "expo-application": "^4.0.2",
     "expo-constants": "^13.0.2",
     "expo-updates": "^0.11.6",
