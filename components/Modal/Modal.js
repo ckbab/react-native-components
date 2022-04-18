@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
-import { useScreenSize } from "../../hooks";
+import { useScreen } from "../../hooks";
 import { useTheme } from "../Theme/Theme";
 
 export default function Modal({
@@ -15,7 +15,7 @@ export default function Modal({
 }) {
   const { colors } = useTheme();
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const screenSize = useScreenSize();
+  const screenSize = useScreen();
 
   useEffect(() => {
     const keyboardShow = (event) => {
