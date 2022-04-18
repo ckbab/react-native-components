@@ -38,5 +38,15 @@ import { Theme } from "@ckbab/react-native-components";
 - `Flag({ code, size, style })`
 - `Icon({ name, size, color, style })`
 - `Loader({ type, style })`
+- `Modal({ children, footer, header, isOpen, onRequestClose })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `Theme({ children, colors, fonts })`
+
+## Utils
+
+### Screen
+
+- `getBottomMargin()`
+- `getScreenHeight(factor = 1)`
+- `getScreenWidth(factor = 1)`
+- `getStatusBarHeight()`

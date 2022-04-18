@@ -5,5 +5,6 @@ export { default as Dialog } from "./Dialog/Dialog";
 export { default as Flag } from "./Flag/Flag";
 export { default as Icon } from "./Icon/Icon";
 export { default as Loader } from "./Loader/Loader";
+export { default as Modal } from "./Modal/Modal";
 export { default as Text } from "./Text/Text";
 export { default as Theme } from "./Theme/Theme";
