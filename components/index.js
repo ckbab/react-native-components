@@ -6,6 +6,7 @@ export { default as Flag } from "./Flag/Flag";
 export { default as FlatButton } from "./FlatButton/FlatButton";
 export { default as Icon } from "./Icon/Icon";
 export { default as Loader } from "./Loader/Loader";
+export { default as MessageContainer } from "./MessageContainer/MessageContainer";
 export { default as Modal } from "./Modal/Modal";
 export { default as Screen } from "./Screen/Screen";
 export { default as Text } from "./Text/Text";

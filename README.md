@@ -55,6 +55,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `FlatButton({ disabled, label, onPress, type, style })`
 - `Icon({ name, size, color, style })`
 - `Loader({ type, style })`
+- `MessageContainer()`
 - `Modal({ children, footer, header, isOpen, onRequestClose, style })`
 - `Screen({ children, component, contentContainerStyle, navigation, style, ...rest })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
@@ -70,6 +71,8 @@ import { Theme } from "@ckbab/react-native-components";
 - `useNavigator()`
 - `usePushToken()`
 - `useScreen()`
+
+Note that `useMessage` requires that `MessageContainer` is rendered.
 
 ## Styles
 
