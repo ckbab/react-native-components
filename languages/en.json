@@ -1,5 +1,6 @@
 {
   "dialog.alert.ok": "OK",
   "dialog.confirm.no": "No",
-  "dialog.confirm.yes": "Yes"
+  "dialog.confirm.yes": "Yes",
+  "message.error.title": "Something went wrong"
 }
