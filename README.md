@@ -43,6 +43,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `TextInput({ disabled, style, ...rest })`
 - `Theme({ children, colors, fonts })`
+- `ToolbarButton({ disabled, icon, label, loading, onPress })`
 
 ## Utils
 
