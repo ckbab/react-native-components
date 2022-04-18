@@ -66,6 +66,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `useDialog()`
 - `useLocalization()`
 - `useMessage()`
+- `usePushToken()`
 - `useScreen()`
 
 ## Styles
