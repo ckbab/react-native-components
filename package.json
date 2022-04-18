@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@ckbab/js-utils": "^1.0.0",
+    "@react-navigation/native": "^6.0.10",
     "expo-application": "^4.0.2",
     "expo-constants": "^13.0.2",
     "expo-notifications": "^0.14.1",

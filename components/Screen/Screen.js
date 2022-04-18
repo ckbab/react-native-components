@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import React from "react";
 import { ScrollView } from "react-native";
@@ -8,10 +9,10 @@ export default function Screen({
   children,
   component: Component,
   contentContainerStyle,
-  navigation,
   style,
   ...rest
 }) {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const { bottomMargin } = useScreen();
 
@@ -41,7 +42,6 @@ Screen.propTypes = {
   children: PropTypes.any,
   component: PropTypes.any,
   contentContainerStyle: PropTypes.any,
-  navigation: PropTypes.object,
   style: PropTypes.any,
   // ...plus all props added to the "component".
 };
@@ -50,6 +50,5 @@ Screen.defaultProps = {
   children: null,
   component: ScrollView,
   contentContainerStyle: {},
-  navigation: null,
   style: {},
 };
