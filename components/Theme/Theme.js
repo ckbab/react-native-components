@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import ThemeContext from "./ThemeContext";
 
-export default function Theme({ children, colors, fonts }) {
+export default function Theme({ children, colors, fonts, labels, language }) {
   return (
-    <ThemeContext.Provider value={{ colors, fonts }}>
+    <ThemeContext.Provider value={{ colors, fonts, labels, language }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -25,6 +25,11 @@ Theme.propTypes = {
     italic: PropTypes.string,
     regular: PropTypes.string,
   }),
+  labels: PropTypes.shape({
+    en: PropTypes.object,
+    sv: PropTypes.object,
+  }),
+  language: PropTypes.oneOf(["en", "sv"]),
 };
 
 Theme.defaultProps = {
@@ -42,4 +47,6 @@ Theme.defaultProps = {
     italic: "",
     regular: "",
   },
+  labels: {},
+  language: "en",
 };

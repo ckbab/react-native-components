@@ -14,14 +14,17 @@ import { Flag } from "@ckbab/react-native-components";
 <Flag code="FR" size={32} />;
 ```
 
-Or if you want to use styles/utils:
+Or if you want to use hooks/styles:
 
 ```js
-import { getScreenHeight } from "@ckbab/react-native-components/utils";
+import { useDialog } from "@ckbab/react-native-components/hooks";
 
-console.log(getScreenHeight());
-// outout: 822
+const dialog = useDialog();
 
+dialog.alert("Hello");
+```
+
+```js
 import { textShadow } from "@ckbab/react-native-components/styles";
 
 <Text style={{ textShadow }}>This text has a shadow</Text>;
@@ -55,21 +58,16 @@ import { Theme } from "@ckbab/react-native-components";
 - `Modal({ children, footer, header, isOpen, onRequestClose, style })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `TextInput({ disabled, style, ...rest })`
-- `Theme({ children, colors, fonts })`
+- `Theme({ children, colors, fonts, labels, language })`
 - `ToolbarButton({ disabled, icon, label, loading, onPress, style })`
 
-## Utils
+## Hooks
 
-### Screen
-
-- `getBottomMargin()`
-- `getScreenHeight(factor = 1)`
-- `getScreenWidth(factor = 1)`
-- `getStatusBarHeight()`
+- `useDialog()`
+- `useLocalization()`
+- `useScreenSize()`
 
 ## Styles
-
-### Shadows
 
 - `shadow2`
 - `shadow4`
