@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
-import { getBottomMargin, getScreenHeight } from "../../util";
+import { getBottomMargin, getScreenHeight } from "../../utils";
 import ThemeContext from "../Theme/ThemeContext";
 
 export default function Modal({

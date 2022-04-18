@@ -1,11 +1,8 @@
 {
   "name": "@ckbab/react-native-components",
   "description": "Usuable React Native components",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
     "@ckbab/js-utils": "^1.0.0",
     "expo-application": "^4.0.2",
@@ -35,7 +32,7 @@
     "type": "git",
     "url": "git+https://github.com/ckbab/react-native-components.git"
   },
-  "keywords": [],
+  "keywords": ["button", "components", "icon", "react native", "text"],
   "author": "",
   "license": "ISC",
   "bugs": {
