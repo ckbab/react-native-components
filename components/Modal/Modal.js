@@ -15,7 +15,7 @@ export default function Modal({
 }) {
   const { colors } = useTheme();
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const screenSize = useScreen();
+  const { bottomMargin, height } = useScreen();
 
   useEffect(() => {
     const keyboardShow = (event) => {
@@ -42,12 +42,12 @@ export default function Modal({
   // Note that we need different behaviour on android/iOS since RNModal
   // behaves differently on each of the platforms.
   const maxHeight = Platform.select({
-    android: (screenSize?.height - keyboardHeight) * 0.8,
-    ios: screenSize?.height * 0.8,
+    android: (height - keyboardHeight) * 0.8,
+    ios: height * 0.8,
   });
   const paddingBottom = Platform.select({
     android: 0,
-    ios: keyboardHeight > 0 ? keyboardHeight : screenSize?.bottomMargin,
+    ios: keyboardHeight > 0 ? keyboardHeight : bottomMargin,
   });
   const backgroundColor = colors?.background || "#fff";
   // Need to set "keyboardShouldPersistTaps" on ScrollView to allow FlatList
