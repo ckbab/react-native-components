@@ -54,6 +54,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `Flag({ code, size, style })`
 - `FlatButton({ disabled, label, onPress, type, style })`
 - `Icon({ name, size, color, style })`
+- `LoadAssets({ children, fonts, images, store })`
 - `Loader({ type, style })`
 - `MessageContainer()`
 - `Modal({ children, footer, header, isOpen, onRequestClose, style })`

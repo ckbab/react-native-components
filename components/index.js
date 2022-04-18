@@ -5,6 +5,7 @@ export { default as Dialog } from "./Dialog/Dialog";
 export { default as Flag } from "./Flag/Flag";
 export { default as FlatButton } from "./FlatButton/FlatButton";
 export { default as Icon } from "./Icon/Icon";
+export { default as LoadAssets } from "./LoadAssets/LoadAssets";
 export { default as Loader } from "./Loader/Loader";
 export { default as MessageContainer } from "./MessageContainer/MessageContainer";
 export { default as Modal } from "./Modal/Modal";
