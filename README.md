@@ -14,13 +14,17 @@ import { Flag } from "@ckbab/react-native-components";
 <Flag code="FR" size={32} />;
 ```
 
-Or if you want to use the util functions:
+Or if you want to use styles/utils:
 
 ```js
 import { getScreenHeight } from "@ckbab/react-native-components/utils";
 
 console.log(getScreenHeight());
 // outout: 822
+
+import { textShadow } from "@ckbab/react-native-components/styles";
+
+<Text style={{ textShadow }}>This text has a shadow</Text>;
 ```
 
 Some of the components such as `Text`, `Dialog` etc have styling which requires some initial config. Wrap your main component with `Theme` and provide props for `colors` and `fonts`.
@@ -62,3 +66,12 @@ import { Theme } from "@ckbab/react-native-components";
 - `getScreenHeight(factor = 1)`
 - `getScreenWidth(factor = 1)`
 - `getStatusBarHeight()`
+
+## Styles
+
+### Shadows
+
+- `shadow2`
+- `shadow4`
+- `shadow8`
+- `textShadow`

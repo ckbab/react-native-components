@@ -2,7 +2,7 @@
   "name": "@ckbab/react-native-components",
   "description": "Usuable React Native components",
   "version": "1.0.3",
-  "main": "index.js",
+  "main": "components/index.js",
   "dependencies": {
     "@ckbab/js-utils": "^1.0.0",
     "expo-application": "^4.0.2",
