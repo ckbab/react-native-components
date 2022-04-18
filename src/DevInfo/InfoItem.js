@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Text from "../Text";
+import Text from "../Text/Text";
 
 export default function InfoItem({ label, value }) {
   const [showAll, setShowAll] = useState(false);

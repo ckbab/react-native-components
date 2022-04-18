@@ -48,7 +48,7 @@ export default function Modal({
     android: 0,
     ios: keyboardHeight > 0 ? keyboardHeight : getBottomMargin(),
   });
-  const backgroundColor = theme.color?.background || "#fff";
+  const backgroundColor = theme?.color?.background || "#fff";
   // Need to set "keyboardShouldPersistTaps" on ScrollView to allow FlatList
   // being pressable within modal.
   return (

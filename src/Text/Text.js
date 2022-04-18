@@ -33,18 +33,18 @@ export default function Text({
 
   const getFontFamily = () => {
     if (bold && italic) {
-      return theme.fonts?.boldItalic;
+      return theme?.fonts?.boldItalic;
     } else if (bold) {
-      return theme.fonts?.bold;
+      return theme?.fonts?.bold;
     } else if (italic) {
-      return theme.fonts?.italic;
+      return theme?.fonts?.italic;
     }
-    return theme.fonts?.regular;
+    return theme?.fonts?.regular;
   };
 
   const fontSize = getFontSize();
-  const fontFamily = getFontFamily(fontSize);
-  const fontColor = color || theme.colors?.font;
+  const fontFamily = getFontFamily(fontSize) || undefined; // Cannot return empty string.
+  const fontColor = color || theme?.colors?.font;
 
   return (
     <NativeText

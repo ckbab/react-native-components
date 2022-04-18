@@ -8,16 +8,16 @@ import ThemeContext from "../Theme/ThemeContext";
 // functional component where propTypes has been defined.
 const TextInput = forwardRef(({ disabled, style, ...rest }, ref) => {
   const theme = useContext(ThemeContext);
-  const backgroundColor = changeColor(theme.colors?.background, "#000", 0.92);
-  const color = theme.colors?.font;
-  const fontFamily = theme.fonts?.bold;
+  const backgroundColor = changeColor(theme?.colors?.background, "#000", 0.95);
+  const color = theme?.colors?.font;
+  const fontFamily = theme?.fonts?.bold || undefined; // Cannot return empty string.
   return (
     <NativeTextInput
       ref={ref}
       style={[styles.container, { backgroundColor, color, fontFamily }, style]}
       placeholderTextColor={changeColor(color, "#fff", 0.4)}
       editable={!disabled}
-      selectionColor={theme.colors?.primary}
+      selectionColor={theme?.colors?.primary}
       {...rest}
     />
   );

@@ -18,8 +18,8 @@ export default function ToolbarButton({
   const theme = useContext(ThemeContext);
 
   const color = getContrastColor(
-    theme.colors?.background,
-    theme.colors?.primary,
+    theme?.colors?.background,
+    theme?.colors?.primary,
     "#fff"
   );
 

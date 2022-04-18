@@ -6,7 +6,7 @@ import ThemeContext from "../Theme/ThemeContext";
 
 export default function Icon({ name, size, color, style }) {
   const theme = useContext(ThemeContext);
-  const iconColor = theme.colors?.font || color;
+  const iconColor = theme?.colors?.font || color;
   const prefix = Platform.select({ ios: "ios-", android: "md-" });
   const icon = prefix + name;
   return <ExpoIcon name={icon} size={size} color={iconColor} style={style} />;

@@ -7,7 +7,7 @@ import ThemeContext from "../Theme/ThemeContext";
 export default function Dialog({ children, isOpen, onRequestClose, style }) {
   const theme = useContext(ThemeContext);
 
-  const backgroundColor = theme.colors?.background || "#fff";
+  const backgroundColor = theme?.colors?.background || "#fff";
 
   return (
     <RNModal

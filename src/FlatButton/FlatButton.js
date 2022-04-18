@@ -10,11 +10,11 @@ export default function FlatButton({ disabled, label, onPress, type, style }) {
   const theme = useContext(ThemeContext);
 
   const backgroundColor =
-    type === "primary" ? theme.colors?.primary : theme.colors?.background;
+    type === "default" ? theme?.colors?.primary : theme?.colors?.background;
 
   const fontColor = getContrastColor(
     backgroundColor,
-    theme.colors?.primary,
+    theme?.colors?.primary,
     "#fff"
   );
 
