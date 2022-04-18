@@ -13,6 +13,7 @@ export default function ToolbarButton({
   label,
   loading,
   onPress,
+  style,
 }) {
   const theme = useContext(ThemeContext);
 
@@ -24,14 +25,18 @@ export default function ToolbarButton({
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <ActivityIndicator color={color} />
       </View>
     );
   }
 
   return (
-    <Button onPress={onPress} style={styles.container} disabled={disabled}>
+    <Button
+      onPress={onPress}
+      style={[styles.container, style]}
+      disabled={disabled}
+    >
       {icon ? (
         <Icon name={icon} size={24} color={color} />
       ) : (
@@ -47,6 +52,7 @@ ToolbarButton.propTypes = {
   label: PropTypes.string,
   loading: PropTypes.bool,
   onPress: PropTypes.func,
+  style: PropTypes.any,
 };
 
 ToolbarButton.defaultProps = {
@@ -55,6 +61,7 @@ ToolbarButton.defaultProps = {
   label: "",
   loading: false,
   onPress: null,
+  style: {},
 };
 
 const styles = StyleSheet.create({

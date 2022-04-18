@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
+import { getBottomMargin, getScreenHeight } from "../../util";
 import ThemeContext from "../Theme/ThemeContext";
-import { getBottomMargin, getScreenHeight } from "../../util/index";
 
 export default function Modal({
   children,
@@ -11,6 +11,7 @@ export default function Modal({
   header,
   isOpen,
   onRequestClose,
+  style,
 }) {
   const theme = useContext(ThemeContext);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -61,7 +62,13 @@ export default function Modal({
       onSwipeComplete={onRequestClose}
       propagateSwipe
     >
-      <View style={{ backgroundColor, maxHeight, paddingBottom }}>
+      <View
+        style={[
+          styles.modal,
+          { backgroundColor, maxHeight, paddingBottom },
+          style,
+        ]}
+      >
         {header}
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -81,6 +88,7 @@ Modal.propTypes = {
   header: PropTypes.node,
   isOpen: PropTypes.bool,
   onRequestClose: PropTypes.func,
+  style: PropTypes.any,
 };
 
 Modal.defaultProps = {
@@ -89,11 +97,17 @@ Modal.defaultProps = {
   header: null,
   isOpen: false,
   onRequestClose: null,
+  style: {},
 };
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-end",
     margin: 0,
+  },
+  modal: {
+    padding: 16,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
   },
 });

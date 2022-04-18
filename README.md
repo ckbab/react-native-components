@@ -39,11 +39,11 @@ import { Theme } from "@ckbab/react-native-components";
 - `FlatButton({ disabled, label, onPress, type, style })`
 - `Icon({ name, size, color, style })`
 - `Loader({ type, style })`
-- `Modal({ children, footer, header, isOpen, onRequestClose })`
+- `Modal({ children, footer, header, isOpen, onRequestClose, style })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `TextInput({ disabled, style, ...rest })`
 - `Theme({ children, colors, fonts })`
-- `ToolbarButton({ disabled, icon, label, loading, onPress })`
+- `ToolbarButton({ disabled, icon, label, loading, onPress, style })`
 
 ## Utils
 
