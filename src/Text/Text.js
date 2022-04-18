@@ -73,7 +73,7 @@ Text.propTypes = {
 Text.defaultProps = {
   bold: false,
   children: null,
-  color: null,
+  color: "", // Default is font color from the theme.
   italic: false,
   numberOfLines: null,
   onPress: null,

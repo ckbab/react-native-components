@@ -36,6 +36,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `DevInfo()`
 - `Dialog({ children, isOpen, onRequestClose, style })`
 - `Flag({ code, size, style })`
+- `Icon({ name, size, color, style })`
 - `Loader({ type, style })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `Theme({ children, colors, fonts })`
