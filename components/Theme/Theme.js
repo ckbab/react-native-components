@@ -1,10 +1,34 @@
 import PropTypes from "prop-types";
-import React from "react";
-import ThemeContext from "./ThemeContext";
+import React, { createContext, useContext } from "react";
 
-export default function Theme({ children, colors, fonts, labels, language }) {
+const initialState = {
+  colors: {
+    background: "#ecf0f1",
+    error: "#e74c3c",
+    font: "#1e272e",
+    primary: "#2980b9",
+    success: "#27ae60",
+  },
+  fonts: {
+    bold: "",
+    boldItalic: "",
+    italic: "",
+    regular: "",
+  },
+  labels: {},
+  language: "en",
+};
+
+const ThemeContext = createContext(initialState);
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  return context;
+}
+
+export default function Theme({ children, ...rest }) {
   return (
-    <ThemeContext.Provider value={{ colors, fonts, labels, language }}>
+    <ThemeContext.Provider value={{ ...rest }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -34,19 +58,5 @@ Theme.propTypes = {
 
 Theme.defaultProps = {
   children: null,
-  colors: {
-    background: "#ecf0f1",
-    error: "#e74c3c",
-    font: "#1e272e",
-    primary: "#2980b9",
-    success: "#27ae60",
-  },
-  fonts: {
-    bold: "",
-    boldItalic: "",
-    italic: "",
-    regular: "",
-  },
-  labels: {},
-  language: "en",
+  ...initialState,
 };

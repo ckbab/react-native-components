@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Text as NativeText } from "react-native";
-import ThemeContext from "../Theme/ThemeContext";
+import { useTheme } from "../Theme/Theme";
 
 export default function Text({
   bold,
@@ -14,7 +14,7 @@ export default function Text({
   size,
   style,
 }) {
-  const theme = useContext(ThemeContext);
+  const { colors, fonts } = useTheme();
 
   const getFontSize = () => {
     if (size === "small") {
@@ -33,18 +33,18 @@ export default function Text({
 
   const getFontFamily = () => {
     if (bold && italic) {
-      return theme?.fonts?.boldItalic;
+      return fonts?.boldItalic;
     } else if (bold) {
-      return theme?.fonts?.bold;
+      return fonts?.bold;
     } else if (italic) {
-      return theme?.fonts?.italic;
+      return fonts?.italic;
     }
-    return theme?.fonts?.regular;
+    return fonts?.regular;
   };
 
   const fontSize = getFontSize();
   const fontFamily = getFontFamily(fontSize) || undefined; // Cannot return empty string.
-  const fontColor = color || theme?.colors?.font;
+  const fontColor = color || colors?.font;
 
   return (
     <NativeText

@@ -1,24 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import stringInject from "stringinject";
 import { mergeDeep } from "timm";
-import ThemeContext from "../components/Theme/ThemeContext";
+import { useTheme } from "../components/Theme/Theme";
 import en from "../languages/en.json";
 import sv from "../languages/sv.json";
 
 const defaultLabels = { en, sv };
 
 export function useLocalization() {
-  const [labels, setLabels] = useState({});
-  const theme = useContext(ThemeContext);
+  const [dictionary, setDictionary] = useState({});
+  const { labels, language } = useTheme();
 
   useEffect(() => {
-    const appLabels = theme?.labels ? theme?.labels[theme?.language] || {} : {};
+    const appLabels = labels ? labels || {} : {};
     const allLabels = mergeDeep(defaultLabels, appLabels);
-    const currentLabels = allLabels[theme?.language];
-    setLabels(currentLabels);
-  }, [theme?.language]);
+    const currentLabels = allLabels[language];
+    setDictionary(currentLabels);
+  }, [labels, language]);
 
-  const localize = (key) => (labels ? labels[key] || key : key);
+  const localize = (key) => (dictionary ? dictionary[key] || key : key);
 
   const injectLocalize = (key, arr) => {
     const data = arr instanceof Array ? arr : [arr];

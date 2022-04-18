@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
 import { useScreenSize } from "../../hooks";
-import ThemeContext from "../Theme/ThemeContext";
+import { useTheme } from "../Theme/Theme";
 
 export default function Modal({
   children,
@@ -13,7 +13,7 @@ export default function Modal({
   onRequestClose,
   style,
 }) {
-  const theme = useContext(ThemeContext);
+  const { colors } = useTheme();
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const screenSize = useScreenSize();
 
@@ -49,7 +49,7 @@ export default function Modal({
     android: 0,
     ios: keyboardHeight > 0 ? keyboardHeight : screenSize?.bottomMargin,
   });
-  const backgroundColor = theme?.color?.background || "#fff";
+  const backgroundColor = colors?.background || "#fff";
   // Need to set "keyboardShouldPersistTaps" on ScrollView to allow FlatList
   // being pressable within modal.
   return (

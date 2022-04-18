@@ -1,23 +1,23 @@
 import { changeColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { StyleSheet, TextInput as NativeTextInput } from "react-native";
-import ThemeContext from "../Theme/ThemeContext";
+import { useTheme } from "../Theme/Theme";
 
 // Need to use arrow function and displayName since forwardRef cannot take a
 // functional component where propTypes has been defined.
 const TextInput = forwardRef(({ disabled, style, ...rest }, ref) => {
-  const theme = useContext(ThemeContext);
-  const backgroundColor = changeColor(theme?.colors?.background, "#000", 0.95);
-  const color = theme?.colors?.font;
-  const fontFamily = theme?.fonts?.bold || undefined; // Cannot return empty string.
+  const { colors, fonts } = useTheme();
+  const backgroundColor = changeColor(colors?.background, "#000", 0.95);
+  const color = colors?.font;
+  const fontFamily = fonts?.bold || undefined; // Cannot return empty string.
   return (
     <NativeTextInput
       ref={ref}
       style={[styles.container, { backgroundColor, color, fontFamily }, style]}
       placeholderTextColor={changeColor(color, "#fff", 0.4)}
       editable={!disabled}
-      selectionColor={theme?.colors?.primary}
+      selectionColor={colors?.primary}
       {...rest}
     />
   );

@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
-import ThemeContext from "../Theme/ThemeContext";
+import { useTheme } from "../Theme/Theme";
 
 export default function Dialog({ children, isOpen, onRequestClose, style }) {
-  const theme = useContext(ThemeContext);
-
-  const backgroundColor = theme?.colors?.background || "#fff";
+  const { colors } = useTheme();
+  const backgroundColor = colors?.background || "#fff";
 
   return (
     <RNModal

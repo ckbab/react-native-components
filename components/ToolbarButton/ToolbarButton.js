@@ -1,11 +1,11 @@
 import { getContrastColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import Text from "../Text/Text";
-import ThemeContext from "../Theme/ThemeContext";
+import { useTheme } from "../Theme/Theme";
 
 export default function ToolbarButton({
   disabled,
@@ -15,13 +15,9 @@ export default function ToolbarButton({
   onPress,
   style,
 }) {
-  const theme = useContext(ThemeContext);
+  const { colors } = useTheme();
 
-  const color = getContrastColor(
-    theme?.colors?.background,
-    theme?.colors?.primary,
-    "#fff"
-  );
+  const color = getContrastColor(colors?.background, colors?.primary, "#fff");
 
   if (loading) {
     return (

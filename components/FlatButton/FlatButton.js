@@ -1,22 +1,18 @@
 import { getContrastColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import Button from "../Button/Button";
-import ThemeContext from "../Theme/ThemeContext";
 import Text from "../Text/Text";
+import { useTheme } from "../Theme/Theme";
 
 export default function FlatButton({ disabled, label, onPress, type, style }) {
-  const theme = useContext(ThemeContext);
+  const { colors } = useTheme();
 
   const backgroundColor =
-    type === "default" ? theme?.colors?.primary : theme?.colors?.background;
+    type === "default" ? colors?.primary : colors?.background;
 
-  const fontColor = getContrastColor(
-    backgroundColor,
-    theme?.colors?.primary,
-    "#fff"
-  );
+  const fontColor = getContrastColor(backgroundColor, colors?.primary, "#fff");
 
   return (
     <Button
