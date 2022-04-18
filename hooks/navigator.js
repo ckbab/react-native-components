@@ -1,20 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useCallback } from "react";
+import React from "react";
 import { View } from "react-native";
 import { ToolbarButton } from "../components";
 import { useTheme } from "../components/Theme/Theme";
 import { shadow2 } from "../styles";
 
-export default function useNavigator() {
-  const navigation = useNavigation();
+export function useNavigator() {
   const { colors, fonts } = useTheme();
 
-  const push = (name, params) => {
-    const key = name + JSON.stringify(params);
-    navigation.navigate({ name, key, params });
-  };
-
-  const stackOptions = useCallback(({ route, navigation }) => {
+  const screenOptions = ({ route, navigation }) => {
     const shadow = route?.params?.isScrolled ? shadow2 : null;
     return {
       headerLeft: () => (
@@ -36,7 +29,7 @@ export default function useNavigator() {
         fontSize: 20,
       },
     };
-  }, []);
+  };
 
-  return { push, stackOptions };
+  return { screenOptions };
 }

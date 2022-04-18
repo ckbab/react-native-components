@@ -7,6 +7,7 @@ export { default as FlatButton } from "./FlatButton/FlatButton";
 export { default as Icon } from "./Icon/Icon";
 export { default as Loader } from "./Loader/Loader";
 export { default as Modal } from "./Modal/Modal";
+export { default as Screen } from "./Screen/Screen";
 export { default as Text } from "./Text/Text";
 export { default as TextInput } from "./TextInput/TextInput";
 export { default as Theme } from "./Theme/Theme";

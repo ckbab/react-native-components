@@ -56,7 +56,7 @@ import { Theme } from "@ckbab/react-native-components";
 - `Icon({ name, size, color, style })`
 - `Loader({ type, style })`
 - `Modal({ children, footer, header, isOpen, onRequestClose, style })`
-- `Screen({ children, component, contentContainerStyle, navigation,style, ...rest })`
+- `Screen({ children, component, contentContainerStyle, navigation, style, ...rest })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `TextInput({ disabled, style, ...rest })`
 - `Theme({ children, colors, fonts, labels, language })`

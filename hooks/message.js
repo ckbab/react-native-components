@@ -3,7 +3,7 @@ import { showMessage as showFlashMessage } from "react-native-flash-message";
 import { useTheme } from "../components/Theme/Theme";
 import { useLocalization } from "./localization";
 
-export default function useMessage() {
+export function useMessage() {
   const { colors } = useTheme();
   const { localize } = useLocalization();
 

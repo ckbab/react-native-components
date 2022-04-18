@@ -1,6 +1,6 @@
 import * as Notifications from "expo-notifications";
 
-export default function usePushToken() {
+export function usePushToken() {
   const get = async () => {
     if (!__DEV__) {
       const { status: existingStatus } =
