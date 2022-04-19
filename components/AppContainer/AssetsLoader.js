@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import React, { useState } from "react";
 import { View } from "react-native";
 
-export default function LoadAssets({ children, fonts, images }) {
+export default function AssetsLoader({ children, fonts, images }) {
   const [assetsLoaded, setAssetsLoaded] = useState(false);
   const [error, setError] = useState(false);
 

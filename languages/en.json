@@ -1,4 +1,5 @@
 {
+  "appContainer.loading": "Downloading latest version...",
   "dialog.alert.ok": "OK",
   "dialog.confirm.no": "No",
   "dialog.confirm.yes": "Yes",

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import LoadAssets from "./LoadAssets";
+import AssetsLoader from "./AssetsLoader";
+import ExpoLoader from "./ExpoLoader";
 import MessageContainer from "./MessageContainer";
 import StoreProvider from "./StoreProvider";
 import ThemeProvider from "./ThemeProvider";
@@ -15,22 +16,24 @@ export default function AppContainer({
   language,
   reducers,
 }) {
-  // Pass colors, dictionary, fonts and current language to the ThemeProvider so
-  // they can be accessible by child components such as color/font for Text etc.
+  // Pass colors, dictionary, and language to the ThemeProvider so the props can
+  // be accessible by child components such as color/font for Text etc.
   return (
-    <LoadAssets fonts={fonts} images={images}>
-      <StoreProvider reducers={reducers}>
-        <ThemeProvider
-          colors={colors}
-          dictionary={dictionary}
-          fonts={fonts}
-          language={language}
-        >
-          <View style={styles.container}>{children}</View>
-          <MessageContainer />
-        </ThemeProvider>
-      </StoreProvider>
-    </LoadAssets>
+    <ExpoLoader>
+      <AssetsLoader fonts={fonts} images={images}>
+        <StoreProvider reducers={reducers}>
+          <ThemeProvider
+            colors={colors}
+            dictionary={dictionary}
+            fonts={fonts}
+            language={language}
+          >
+            <View style={styles.container}>{children}</View>
+            <MessageContainer />
+          </ThemeProvider>
+        </StoreProvider>
+      </AssetsLoader>
+    </ExpoLoader>
   );
 }
 
@@ -61,7 +64,13 @@ AppContainer.propTypes = {
 
 AppContainer.defaultProps = {
   children: null,
-  colors: {},
+  colors: {
+    background: "#eee",
+    error: "#ff0000",
+    font: "#000000",
+    primary: "#0000ff",
+    success: "#00ff00",
+  },
   dictionary: {
     en: {},
     sv: {},

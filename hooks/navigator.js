@@ -5,7 +5,7 @@ import { useTheme } from "../components/AppContainer/ThemeProvider";
 import { shadow2 } from "../styles";
 
 export function useNavigator() {
-  const { colors, fonts } = useTheme();
+  const { colors } = useTheme();
 
   const screenOptions = ({ route, navigation }) => {
     const shadow = route?.params?.isScrolled ? shadow2 : null;
@@ -24,7 +24,7 @@ export function useNavigator() {
       headerTitleAlign: "center",
       headerTitleStyle: {
         textAlign: "center",
-        fontFamily: fonts?.bold,
+        fontFamily: "bold",
         fontWeight: "400",
         fontSize: 20,
       },

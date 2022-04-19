@@ -14,7 +14,7 @@ export default function Text({
   size,
   style,
 }) {
-  const { colors, fonts } = useTheme();
+  const { colors } = useTheme();
 
   const getFontSize = () => {
     if (size === "small") {
@@ -33,17 +33,17 @@ export default function Text({
 
   const getFontFamily = () => {
     if (bold && italic) {
-      return fonts?.boldItalic;
+      return "boldItalic";
     } else if (bold) {
-      return fonts?.bold;
+      return "bold";
     } else if (italic) {
-      return fonts?.italic;
+      return "italic";
     }
-    return fonts?.regular;
+    return "regular";
   };
 
   const fontSize = getFontSize();
-  const fontFamily = getFontFamily(fontSize) || undefined; // Cannot return empty string.
+  const fontFamily = getFontFamily();
   const fontColor = color || colors?.font;
 
   return (

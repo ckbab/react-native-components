@@ -7,14 +7,13 @@ import { useTheme } from "../AppContainer/ThemeProvider";
 // Need to use arrow function and displayName since forwardRef cannot take a
 // functional component where propTypes has been defined.
 const TextInput = forwardRef(({ disabled, style, ...rest }, ref) => {
-  const { colors, fonts } = useTheme();
+  const { colors } = useTheme();
   const backgroundColor = changeColor(colors?.background, "#000", 0.95);
   const color = colors?.font;
-  const fontFamily = fonts?.bold || undefined; // Cannot return empty string.
   return (
     <NativeTextInput
       ref={ref}
-      style={[styles.container, { backgroundColor, color, fontFamily }, style]}
+      style={[styles.container, { backgroundColor, color }, style]}
       placeholderTextColor={changeColor(color, "#fff", 0.4)}
       editable={!disabled}
       selectionColor={colors?.primary}
@@ -38,6 +37,7 @@ TextInput.displayName = "TextInput";
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "bold",
     fontSize: 20,
     borderRadius: 4,
     padding: 12,
