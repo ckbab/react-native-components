@@ -14,12 +14,14 @@ export function useLocalization() {
     setLabels(fullDictionary[language] || {});
   }, [dictionary, language]);
 
-  const localize = (key) => labels[key] || key;
-
-  const injectLocalize = (key, arr) => {
-    const data = arr instanceof Array ? arr : [arr];
-    return stringInject(localize(key), data);
+  const translate = (key, arr) => {
+    if (arr) {
+      const data = arr instanceof Array ? arr : [arr];
+      return stringInject(labels[key], data) || key;
+    } else {
+      return labels[key] || key;
+    }
   };
 
-  return { localize, injectLocalize };
+  return { translate };
 }

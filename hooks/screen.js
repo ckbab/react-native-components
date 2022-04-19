@@ -6,10 +6,10 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 export function useScreen() {
   const orientation = useOrientation();
   const [screenSize, setScreenSize] = useState({
-    bottomMargin: undefined,
-    height: undefined,
-    statusBarHeight: undefined,
-    width: undefined,
+    bottomMargin: 0,
+    height: 0,
+    statusBarHeight: 0,
+    width: 0,
   });
 
   useEffect(() => {
