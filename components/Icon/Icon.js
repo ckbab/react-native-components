@@ -6,7 +6,7 @@ import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Icon({ name, size, color, style }) {
   const { colors } = useTheme();
-  const iconColor = colors?.font || color;
+  const iconColor = color || colors?.font;
   const prefix = Platform.select({ ios: "ios-", android: "md-" });
   const icon = prefix + name;
   return <ExpoIcon name={icon} size={size} color={iconColor} style={style} />;
