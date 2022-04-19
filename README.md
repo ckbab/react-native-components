@@ -31,6 +31,13 @@ const fonts = {
 const images = [require("./images/logo.png")];
 
 <AppContainer
+  colors={{
+    background: "#eee",
+    error: "#ff0000",
+    font: "#000000",
+    primary: "#0000ff",
+    success: "#00ff00",
+  }}
   dictionary={{ en: English, sv: Swedish }}
   fonts={fonts}
   languageSelector={(state) => state?.settings?.language}
