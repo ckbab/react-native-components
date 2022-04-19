@@ -2,10 +2,10 @@ import { getContrastColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
 import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useTheme } from "../AppContainer/ThemeProvider";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import Text from "../Text/Text";
-import { useTheme } from "../Theme/Theme";
 
 export default function ToolbarButton({
   disabled,

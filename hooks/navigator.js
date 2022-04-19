@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { ToolbarButton } from "../components";
-import { useTheme } from "../components/Theme/Theme";
+import { useTheme } from "../components/AppContainer/ThemeProvider";
 import { shadow2 } from "../styles";
 
 export function useNavigator() {

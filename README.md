@@ -47,6 +47,7 @@ import { Theme } from "@ckbab/react-native-components";
 
 ## Components
 
+- `AppContainer({ children, colors, dictionary, fonts, images, language, reducers, storeReducers })`
 - `Button({ children, disabled, onLongPress, onPress, style })`
 - `DevButton({ children, onSuccess, trigger })`
 - `DevInfo()`
@@ -54,14 +55,11 @@ import { Theme } from "@ckbab/react-native-components";
 - `Flag({ code, size, style })`
 - `FlatButton({ disabled, label, onPress, type, style })`
 - `Icon({ name, size, color, style })`
-- `LoadAssets({ children, fonts, images, store })`
 - `Loader({ type, style })`
-- `MessageContainer()`
 - `Modal({ children, footer, header, isOpen, onRequestClose, style })`
 - `Screen({ children, component, contentContainerStyle, navigation, style, ...rest })`
 - `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
 - `TextInput({ disabled, style, ...rest })`
-- `Theme({ children, colors, fonts, labels, language })`
 - `ToolbarButton({ disabled, icon, label, loading, onPress, style })`
 
 ## Hooks

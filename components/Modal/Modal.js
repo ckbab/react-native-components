@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Keyboard, Platform, ScrollView, StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
 import { useScreen } from "../../hooks";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Modal({
   children,

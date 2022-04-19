@@ -2,7 +2,7 @@ import ExpoIcon from "@expo/vector-icons/Ionicons";
 import PropTypes from "prop-types";
 import React from "react";
 import { Platform } from "react-native";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Icon({ name, size, color, style }) {
   const { colors } = useTheme();

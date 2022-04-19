@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import FlashMessage from "react-native-flash-message";
 import { shadow4 } from "../../styles";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "./ThemeProvider";
 
 export default function MessageContainer() {
   const { fonts } = useTheme();
@@ -10,8 +10,8 @@ export default function MessageContainer() {
     <FlashMessage
       position="top"
       style={styles.flashContainer}
-      titleStyle={[styles.flashTitle, { fontFamily: fonts?.bold }]}
-      textStyle={[styles.flashText, { fontFamily: fonts?.regular }]}
+      titleStyle={[styles.flashTitle, { fontFamily: fonts?.bold || null }]}
+      textStyle={[styles.flashText, { fontFamily: fonts?.regular || null }]}
     />
   );
 }

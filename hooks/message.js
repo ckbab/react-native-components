@@ -1,6 +1,6 @@
 import { getContrastColor } from "@ckbab/js-utils";
 import { showMessage as showFlashMessage } from "react-native-flash-message";
-import { useTheme } from "../components/Theme/Theme";
+import { useTheme } from "../components/AppContainer/ThemeProvider";
 import { useLocalization } from "./localization";
 
 export function useMessage() {

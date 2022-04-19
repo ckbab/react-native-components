@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import RNModal from "react-native-modal";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Dialog({ children, isOpen, onRequestClose, style }) {
   const { colors } = useTheme();

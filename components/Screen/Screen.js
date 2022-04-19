@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { ScrollView } from "react-native";
 import { useScreen } from "../../hooks";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Screen({
   children,

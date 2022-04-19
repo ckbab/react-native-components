@@ -2,7 +2,7 @@ import { changeColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
 import React, { forwardRef } from "react";
 import { StyleSheet, TextInput as NativeTextInput } from "react-native";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 // Need to use arrow function and displayName since forwardRef cannot take a
 // functional component where propTypes has been defined.

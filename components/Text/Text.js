@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Text as NativeText } from "react-native";
-import { useTheme } from "../Theme/Theme";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function Text({
   bold,
