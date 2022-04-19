@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import { useSelector } from "react-redux";
 
 const ThemeContext = createContext();
 
@@ -11,8 +12,9 @@ export default function ThemeProvider({
   children,
   colors,
   dictionary,
-  language,
+  languageSelector,
 }) {
+  const language = useSelector(languageSelector);
   return (
     <ThemeContext.Provider value={{ colors, dictionary, language }}>
       {children}

@@ -13,27 +13,29 @@ export default function AppContainer({
   dictionary,
   fonts,
   images,
-  language,
+  languageSelector,
   reducers,
 }) {
   // Pass colors, dictionary, and language to the ThemeProvider so the props can
   // be accessible by child components such as color/font for Text etc.
+  // Note that AssetsLoader needs to be loaded first since fonts might be used
+  // in ExpoLoader.
   return (
-    <ExpoLoader>
-      <AssetsLoader fonts={fonts} images={images}>
+    <AssetsLoader fonts={fonts} images={images}>
+      <ExpoLoader>
         <StoreProvider reducers={reducers}>
           <ThemeProvider
             colors={colors}
             dictionary={dictionary}
             fonts={fonts}
-            language={language}
+            languageSelector={languageSelector}
           >
             <View style={styles.container}>{children}</View>
             <MessageContainer />
           </ThemeProvider>
         </StoreProvider>
-      </AssetsLoader>
-    </ExpoLoader>
+      </ExpoLoader>
+    </AssetsLoader>
   );
 }
 
@@ -56,9 +58,9 @@ AppContainer.propTypes = {
     italic: PropTypes.any,
     regular: PropTypes.any,
   }),
-  images: PropTypes.arrayOf(PropTypes.function),
-  language: PropTypes.oneOf(["en", "sv"]),
-  reducers: PropTypes.arrayOf(PropTypes.function),
+  images: PropTypes.arrayOf(PropTypes.any),
+  languageSelector: PropTypes.func,
+  reducers: PropTypes.object,
   storeReducers: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -77,7 +79,7 @@ AppContainer.defaultProps = {
   },
   fonts: {},
   images: [],
-  language: "en",
+  languageSelector: null,
   reducers: [],
   storeReducers: [],
 };

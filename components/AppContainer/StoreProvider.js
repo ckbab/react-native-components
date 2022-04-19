@@ -14,7 +14,7 @@ export default function StoreProvider({ children, reducers, storeReducers }) {
       storage: AsyncStorage,
       whitelist: storeReducers,
     };
-    const reducer = persistCombineReducers(config, reducers);
+    const reducer = persistCombineReducers(config, { ...reducers });
     const store = configureStore({
       reducer,
       middleware: (getDefaultMiddleware) =>

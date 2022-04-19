@@ -8,13 +8,49 @@ npm install @ckbab/react-native-components
 
 ## Usage
 
+### Wrap main component
+
+First you need to wrap your app's main component with `AppContainer` and load with available props. Your component will be rendered when fonts, images, languages and reducers have been loaded and Expo has downloaded latest update (if any).
+
+```js
+import { AppContainer } from "@ckbab/react-native-components";
+import English from "./languages/en.json";
+import Swedish from "./languages/sv.json";
+import settings from "./store/settings";
+import user from "./store/user";
+
+const fonts = {
+  bold: require("../../../assets/fonts/RobotoCondensed-Regular.ttf"),
+  boldItalic: require("../../../assets/fonts/RobotoCondensed-Italic.ttf"),
+  italic: require("../../../assets/fonts/RobotoCondensed-LightItalic.ttf"),
+  regular: require("../../../assets/fonts/RobotoCondensed-Light.ttf"),
+  "Arsenal-Bold": require("../../../assets/fonts/Arsenal-Bold.ttf"),
+  ...
+};
+
+const images = [require("./images/logo.png")];
+
+<AppContainer
+  dictionary={{ en: English, sv: Swedish }}
+  fonts={fonts}
+  languageSelector={(state) => state?.settings?.language}
+  images={images}
+  reducers={{ settings, user }}
+  storeReducers={["settings", "user"]}
+>
+  /* Main app component */
+</AppContainer>
+```
+
+### Use components
+
 ```js
 import { Flag } from "@ckbab/react-native-components";
 
 <Flag code="FR" size={32} />;
 ```
 
-Or if you want to use hooks/styles:
+### Use hooks
 
 ```js
 import { useDialog } from "@ckbab/react-native-components/hooks";
@@ -24,30 +60,17 @@ const dialog = useDialog();
 dialog.alert("Hello");
 ```
 
+### Use styles
+
 ```js
 import { textShadow } from "@ckbab/react-native-components/styles";
 
 <Text style={{ textShadow }}>This text has a shadow</Text>;
 ```
 
-Some of the components such as `Text`, `Dialog` etc have styling which requires some initial config. Wrap your main component with `Theme` and provide props for `colors` and `fonts`.
-
-```js
-import { Theme } from "@ckbab/react-native-components";
-
-<Theme
-  colors={{
-    fonts: { bold: "RobotoBold", regular: "RobotoRegular", ... },
-    colors: { background: "#fff", font: "#000", ... },
-  }}
->
-  /* Main app component */
-</Theme>
-```
-
 ## Components
 
-- `AppContainer({ children, colors, dictionary, fonts, images, language, reducers, storeReducers })`
+- `AppContainer({ children, colors, dictionary, fonts, images, languageSelector, reducers, storeReducers })`
 - `Button({ children, disabled, onLongPress, onPress, style })`
 - `DevButton({ children, onSuccess, trigger })`
 - `DevInfo()`
@@ -70,8 +93,6 @@ import { Theme } from "@ckbab/react-native-components";
 - `useNavigator()`
 - `usePushToken()`
 - `useScreen()`
-
-Note that `useMessage` requires that `MessageContainer` is rendered.
 
 ## Styles
 
