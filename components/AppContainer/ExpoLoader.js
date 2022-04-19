@@ -1,13 +1,13 @@
 import * as Updates from "expo-updates";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, AppState, StyleSheet, View } from "react-native";
 import { useLocalization } from "../../hooks";
 import Text from "../Text/Text";
 
 export default function ExpoLoader({ children }) {
   const { localize } = useLocalization();
+  const appState = useRef(AppState.currentState);
   const [loaded, setLoaded] = useState(false);
-  const [appState, setAppState] = useState(AppState.currentState);
   // Empty string so ActivityIndicator is not moved when text appears.
   const [text, setText] = useState(" ");
 
@@ -39,12 +39,15 @@ export default function ExpoLoader({ children }) {
 
     // 2. Check for updates everytime user resumes the app.
     const onAppStateChange = async (nextAppState) => {
-      if (appState.match(/inactive|background/) && nextAppState === "active") {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === "active"
+      ) {
         if (!__DEV__) {
           checkForUpdate();
         }
       }
-      setAppState(nextAppState);
+      appState.current = nextAppState;
     };
     const listener = AppState.addEventListener("change", onAppStateChange);
     return () => {
