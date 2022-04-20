@@ -3,7 +3,7 @@ import { useState } from "react";
 import { merge } from "timm";
 import { useTheme } from "../components/AppContainer/ThemeProvider";
 
-export function useFetch(endpoint, params) {
+export function useFetch(endpoint, params, manual) {
   const [refreshing, setRefreshing] = useState(false);
   const { apiUrl, apiParams } = useTheme();
 
@@ -13,7 +13,9 @@ export function useFetch(endpoint, params) {
     params: merge(apiParams, params),
   };
 
-  const [{ data, error: requestError, loading }, fetch] = useAxios(config);
+  const [{ data, error: requestError, loading }, fetch] = useAxios(config, {
+    manual,
+  });
 
   const refresh = async () => {
     setRefreshing(true);

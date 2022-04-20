@@ -14,7 +14,24 @@ export function usePost(endpoint, params) {
     manual: true,
   });
 
-  const execute = (extraParams, onSuccess, onError) => {
+  const getArguments = (args) => {
+    if (typeof args[0] === "object") {
+      return {
+        extraParams: args[0],
+        onSuccess: args[1],
+        onError: args[2],
+      };
+    } else {
+      return {
+        extraParams: {},
+        onSuccess: args[0],
+        onError: args[1],
+      };
+    }
+  };
+
+  const execute = (...args) => {
+    const { extraParams, onSuccess, onError } = getArguments(args);
     const p = merge(apiParams, params, extraParams);
     fetch({ params: p })
       .then(({ data }) => {
