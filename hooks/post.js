@@ -8,15 +8,28 @@ export function usePost(endpoint, params) {
   const config = {
     baseURL: apiUrl,
     url: `post/${endpoint}.php`,
-    params: merge(apiParams, params),
   };
 
-  const [{ data, error: requestError, loading }, execute] = useAxios(config, {
+  const [{ data, error: requestError, loading }, fetch] = useAxios(config, {
     manual: true,
   });
 
-  // Return error if either request fails or API returns error.
-  const error = requestError || data?.error;
+  const execute = (extraParams, onSuccess, onError) => {
+    const p = merge(apiParams, params, extraParams);
+    fetch({ params: p })
+      .then(({ data }) => {
+        if (data?.success && onSuccess) {
+          onSuccess(data);
+        } else if (data?.error && onError) {
+          onError(data);
+        }
+      })
+      .catch(onError);
+  };
 
-  return [{ data, error, submitting: loading }, execute];
+  // Return data in error/success object as complement to the callbacks.
+  const error = requestError || data?.error ? data : null;
+  const success = data?.success ? data : null;
+
+  return [{ error, submitting: loading, success }, execute];
 }
