@@ -5,7 +5,7 @@ import { useLocalization } from "./localization";
 
 export function useMessage() {
   const { colors } = useTheme();
-  const { localize } = useLocalization();
+  const localization = useLocalization();
 
   const success = (title, subtitle) => {
     showFlashMessage({
@@ -19,7 +19,7 @@ export function useMessage() {
 
   const error = (title, subtitle) => {
     showFlashMessage({
-      message: title || localize("message.error.title"),
+      message: title || localization.translate("message.error.title"),
       description: subtitle,
       duration: 4000,
       color: getContrastColor(colors?.error),

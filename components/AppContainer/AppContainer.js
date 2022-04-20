@@ -88,8 +88,8 @@ AppContainer.defaultProps = {
     sv: {},
   },
   languageSelector: null,
-  reducers: [],
-  reducersTemp: [],
+  reducers: {},
+  reducersTemp: {},
 };
 
 const styles = StyleSheet.create({
