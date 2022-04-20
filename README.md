@@ -83,29 +83,31 @@ import { textShadow } from "@ckbab/react-native-components/styles";
 
 ## Components
 
-- `AppContainer({ apiUrl, apiParamsSelector, children, colors, fonts, images, languages, languageSelector, reducers, reducersTemp })`
-- `Button({ children, disabled, onLongPress, onPress, style })`
-- `DevButton({ children, onSuccess, trigger })`
-- `DevInfo()`
-- `Dialog({ children, isOpen, onRequestClose, style })`
-- `Flag({ code, size, style })`
-- `FlatButton({ disabled, label, onPress, type, style })`
-- `Icon({ name, size, color, style })`
-- `Loader({ type, style })`
-- `Modal({ children, footer, header, isOpen, onRequestClose, style })`
-- `Screen({ children, component, contentContainerStyle, navigation, style, ...rest })`
-- `Text({ bold, children, color, italic, numberOfLines, onPress, selectable, size, style })`
-- `TextInput({ disabled, style, ...rest })`
-- `ToolbarButton({ disabled, icon, label, loading, onPress, style })`
+- `AppContainer`
+- `Button`
+- `DevButton`
+- `DevInfo`
+- `Dialog`
+- `Flag`
+- `FlatButton`
+- `Icon`
+- `Loader`
+- `Modal`
+- `Screen`
+- `Text`
+- `TextInput`
+- `ToolbarButton`
 
 ## Hooks
 
-- `useDialog()`
-- `useLocalization()`
-- `useMessage()`
-- `useNavigator()`
-- `usePushToken()`
-- `useScreen()`
+- `useDialog`
+- `useFetch`
+- `useLocalization`
+- `useMessage`
+- `useNavigator`
+- `usePost`
+- `usePushToken`
+- `useScreen`
 
 ## Styles
 
