@@ -14,36 +14,42 @@ First you need to wrap your app's main component with `AppContainer` and load wi
 
 ```js
 import { AppContainer } from "@ckbab/react-native-components";
-import English from "./languages/en.json";
-import Swedish from "./languages/sv.json";
 import settings from "./store/settings";
+import user from "./store/ui";
 import user from "./store/user";
+...
 
 const fonts = {
   bold: require("../../../assets/fonts/RobotoCondensed-Regular.ttf"),
   boldItalic: require("../../../assets/fonts/RobotoCondensed-Italic.ttf"),
-  italic: require("../../../assets/fonts/RobotoCondensed-LightItalic.ttf"),
-  regular: require("../../../assets/fonts/RobotoCondensed-Light.ttf"),
+  ...
   "Arsenal-Bold": require("../../../assets/fonts/Arsenal-Bold.ttf"),
   ...
 };
 
-const images = [require("./images/logo.png")];
+const english = { hello: "Hello" };
+const swedish = { hello: "Hej" };
+
+const images = [require("./images/logo.png"), ...];
 
 <AppContainer
+  apiUrl={apiUrl}
+  apiParamsSelector={(state) => ({
+    apiToken: state?.user?.apiToken,
+    userId: state?.user?.userId,
+    ...
+  })}
   colors={{
-    background: "#eee",
-    error: "#ff0000",
-    font: "#000000",
-    primary: "#0000ff",
-    success: "#00ff00",
+    background: backgroundColor,
+    error: errorColor,
+    ...
   }}
-  dictionary={{ en: English, sv: Swedish }}
   fonts={fonts}
+  languages={{ en: english, sv: swedish, ... }}
   languageSelector={(state) => state?.settings?.language}
   images={images}
-  reducers={{ settings, user }}
-  storeReducers={["settings", "user"]}
+  reducers={{ settings, user, ... }}
+  reducersTemp={{ ui, ... }}
 >
   /* Main app component */
 </AppContainer>
@@ -77,7 +83,7 @@ import { textShadow } from "@ckbab/react-native-components/styles";
 
 ## Components
 
-- `AppContainer({ children, colors, dictionary, fonts, images, languageSelector, reducers, storeReducers })`
+- `AppContainer({ apiUrl, apiParamsSelector, children, colors, fonts, images, languages, languageSelector, reducers, reducersTemp })`
 - `Button({ children, disabled, onLongPress, onPress, style })`
 - `DevButton({ children, onSuccess, trigger })`
 - `DevInfo()`

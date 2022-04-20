@@ -5,23 +5,24 @@ import { View } from "react-native";
 import { Provider } from "react-redux";
 import { persistCombineReducers, persistStore } from "redux-persist";
 
-export default function StoreProvider({ children, reducers, storeReducers }) {
+export default function StoreProvider({ children, reducers, reducersTemp }) {
   const [store, setStore] = useState(null);
 
   useEffect(() => {
     const config = {
       key: "primary",
       storage: AsyncStorage,
-      whitelist: storeReducers,
+      whitelist: Object.keys(reducers),
     };
-    const reducer = persistCombineReducers(config, { ...reducers });
+    const reducers = { ...reducers, ...reducersTemp };
+    const reducer = persistCombineReducers(config, reducers);
     const store = configureStore({
       reducer,
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false }),
     });
     persistStore(store, null, () => setStore(store));
-  }, [reducers, storeReducers]);
+  }, [reducers, reducersTemp]);
 
   if (!store) {
     return <View />;

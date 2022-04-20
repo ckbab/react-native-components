@@ -26,15 +26,15 @@ const availableLabels = { en: EnLabels, sv: SvLabels };
 export function useLocalization() {
   const [countries, setCountries] = useState({});
   const [labels, setLabels] = useState({});
-  const { dictionary, language } = useTheme();
+  const { language, languages } = useTheme();
 
   useEffect(() => {
     // Create label dictionary.
-    const allLabels = mergeDeep(availableLabels, dictionary || {});
+    const allLabels = mergeDeep(availableLabels, languages || {});
     setLabels(allLabels[language] || {});
     // Create country dictionary.
     setCountries(availableCountries[language]?.object());
-  }, [dictionary, language]);
+  }, [language, languages]);
 
   const date = (date, parseFormat) => {
     const d = moment(date, parseFormat);

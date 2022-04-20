@@ -9,14 +9,21 @@ export function useTheme() {
 }
 
 export default function ThemeProvider({
+  apiUrl,
+  apiParamsSelector,
   children,
   colors,
-  dictionary,
+  languages,
   languageSelector,
 }) {
+  // Convert the selectors to real value here so the context contain real values
+  // and not the functions.
+  const apiParams = useSelector(apiParamsSelector);
   const language = useSelector(languageSelector);
   return (
-    <ThemeContext.Provider value={{ colors, dictionary, language }}>
+    <ThemeContext.Provider
+      value={{ apiUrl, apiParams, colors, language, languages }}
+    >
       {children}
     </ThemeContext.Provider>
   );

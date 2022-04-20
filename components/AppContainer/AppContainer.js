@@ -8,26 +8,30 @@ import StoreProvider from "./StoreProvider";
 import ThemeProvider from "./ThemeProvider";
 
 export default function AppContainer({
+  apiUrl,
+  apiParamsSelector,
   children,
   colors,
-  dictionary,
   fonts,
   images,
+  languages,
   languageSelector,
   reducers,
+  reducersTemp,
 }) {
-  // Pass colors, dictionary, and language to the ThemeProvider so the props can
+  // Pass colors, language and languages to the ThemeProvider so the props can
   // be accessible by child components such as color/font for Text etc.
   // Note that AssetsLoader needs to be loaded first since fonts might be used
   // in ExpoLoader.
   return (
     <AssetsLoader fonts={fonts} images={images}>
       <ExpoLoader>
-        <StoreProvider reducers={reducers}>
+        <StoreProvider reducers={reducers} reducersTemp={reducersTemp}>
           <ThemeProvider
+            apiUrl={apiUrl}
+            apiParamsSelector={apiParamsSelector}
             colors={colors}
-            dictionary={dictionary}
-            fonts={fonts}
+            languages={languages}
             languageSelector={languageSelector}
           >
             <View style={styles.container}>{children}</View>
@@ -40,6 +44,8 @@ export default function AppContainer({
 }
 
 AppContainer.propTypes = {
+  apiUrl: PropTypes.string,
+  apiParamsSelector: PropTypes.func,
   children: PropTypes.any,
   colors: PropTypes.shape({
     background: PropTypes.string,
@@ -48,10 +54,6 @@ AppContainer.propTypes = {
     primary: PropTypes.string,
     success: PropTypes.string,
   }),
-  dictionary: PropTypes.shape({
-    en: PropTypes.object,
-    sv: PropTypes.object,
-  }),
   fonts: PropTypes.shape({
     bold: PropTypes.any,
     boldItalic: PropTypes.any,
@@ -59,12 +61,18 @@ AppContainer.propTypes = {
     regular: PropTypes.any,
   }),
   images: PropTypes.arrayOf(PropTypes.any),
+  languages: PropTypes.shape({
+    en: PropTypes.object,
+    sv: PropTypes.object,
+  }),
   languageSelector: PropTypes.func,
   reducers: PropTypes.object,
-  storeReducers: PropTypes.arrayOf(PropTypes.string),
+  reducersTemp: PropTypes.object,
 };
 
 AppContainer.defaultProps = {
+  apiUrl: "",
+  apiParamsSelector: null,
   children: null,
   colors: {
     background: "#eee",
@@ -73,15 +81,15 @@ AppContainer.defaultProps = {
     primary: "#0000ff",
     success: "#00ff00",
   },
-  dictionary: {
+  fonts: {},
+  images: [],
+  languages: {
     en: {},
     sv: {},
   },
-  fonts: {},
-  images: [],
   languageSelector: null,
   reducers: [],
-  storeReducers: [],
+  reducersTemp: [],
 };
 
 const styles = StyleSheet.create({
