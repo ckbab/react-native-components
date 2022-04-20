@@ -1,3 +1,6 @@
+import moment from "moment-timezone";
+import "moment/locale/en-gb";
+import "moment/locale/sv";
 import { useEffect, useState } from "react";
 import stringInject from "stringinject";
 import { mergeDeep } from "timm";
@@ -5,6 +8,11 @@ import { useTheme } from "../components/AppContainer/ThemeProvider";
 import EnLabels from "../languages/en.json";
 import SvLabels from "../languages/sv.json";
 
+// Set default timezone to Stockohlm. Then make it local in "date" function.
+moment.locale("sv");
+moment.tz.setDefault("Europe/Stockholm");
+
+// Note - cannot use normal "import".
 const EnCountries = require("localized-countries")(
   require("localized-countries/data/en")
 );
@@ -25,16 +33,17 @@ export function useLocalization() {
     const allLabels = mergeDeep(availableLabels, dictionary || {});
     setLabels(allLabels[language] || {});
     // Create country dictionary.
-    setCountries(availableCountries[language]);
+    setCountries(availableCountries[language]?.object());
   }, [dictionary, language]);
 
-  const date = () => {
-    // TODO
+  const date = (date, parseFormat) => {
+    const d = moment(date, parseFormat);
+    return d?.local()?.locale(language);
   };
 
   const country = (code) => {
     const countryCode = code?.toString()?.toUpperCase();
-    return countries.get(countryCode);
+    return countries[countryCode];
   };
 
   const translate = (key, arr) => {
