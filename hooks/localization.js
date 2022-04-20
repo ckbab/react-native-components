@@ -2,17 +2,40 @@ import { useEffect, useState } from "react";
 import stringInject from "stringinject";
 import { mergeDeep } from "timm";
 import { useTheme } from "../components/AppContainer/ThemeProvider";
-import en from "../languages/en.json";
-import sv from "../languages/sv.json";
+import EnLabels from "../languages/en.json";
+import SvLabels from "../languages/sv.json";
+
+const EnCountries = require("localized-countries")(
+  require("localized-countries/data/en")
+);
+const SvCountries = require("localized-countries")(
+  require("localized-countries/data/sv")
+);
+
+const availableCountries = { en: EnCountries, sv: SvCountries };
+const availableLabels = { en: EnLabels, sv: SvLabels };
 
 export function useLocalization() {
+  const [countries, setCountries] = useState({});
   const [labels, setLabels] = useState({});
   const { dictionary, language } = useTheme();
 
   useEffect(() => {
-    const fullDictionary = mergeDeep({ en, sv }, dictionary || {});
-    setLabels(fullDictionary[language] || {});
+    // Create label dictionary.
+    const allLabels = mergeDeep(availableLabels, dictionary || {});
+    setLabels(allLabels[language] || {});
+    // Create country dictionary.
+    setCountries(availableCountries[language]);
   }, [dictionary, language]);
+
+  const date = () => {
+    // TODO
+  };
+
+  const country = (code) => {
+    const countryCode = code?.toString()?.toUpperCase();
+    return countries.get(countryCode);
+  };
 
   const translate = (key, arr) => {
     if (arr) {
@@ -23,5 +46,5 @@ export function useLocalization() {
     }
   };
 
-  return { translate };
+  return { date, country, translate };
 }
