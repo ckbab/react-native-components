@@ -33,7 +33,7 @@ export function useFetch(endpoint, defaultParams) {
   }, [response.data]);
 
   // Return error if either request fails or API returns error.
-  const error = response.error || data?.error;
+  const error = response.error || response.data?.error;
 
   return [{ data, error, loading: response.loading, refreshing }, execute];
 }

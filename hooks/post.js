@@ -26,9 +26,8 @@ export function usePost(endpoint, defaultParams) {
       .catch(onError);
   };
 
-  // Return data in error/success object as complement to the callbacks.
-  const error = response.error || response.data?.error ? response.data : null;
-  const success = response.data?.success ? response.data : null;
+  // Return error if either request fails or API returns error.
+  const error = response.error || response.data?.error;
 
-  return [{ error, submitting: response.loading, success }, execute];
+  return [{ data: response.data, error, loading: response.loading }, execute];
 }
