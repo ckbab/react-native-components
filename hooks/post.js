@@ -2,37 +2,19 @@ import useAxios from "axios-hooks";
 import { merge } from "timm";
 import { useTheme } from "../components/AppContainer/ThemeProvider";
 
-export function usePost(endpoint, params) {
+export function usePost(endpoint, defaultParams) {
   const { apiUrl, apiParams } = useTheme();
 
   const config = {
     baseURL: apiUrl,
     url: `post/${endpoint}.php`,
+    params: merge(apiParams, defaultParams),
   };
 
-  const [{ data, error: requestError, loading }, fetch] = useAxios(config, {
-    manual: true,
-  });
+  const [response, fetch] = useAxios(config, { manual: true });
 
-  const getArguments = (args) => {
-    if (typeof args[0] === "object") {
-      return {
-        extraParams: args[0],
-        onSuccess: args[1],
-        onError: args[2],
-      };
-    } else {
-      return {
-        extraParams: {},
-        onSuccess: args[0],
-        onError: args[1],
-      };
-    }
-  };
-
-  const execute = (...args) => {
-    const { extraParams, onSuccess, onError } = getArguments(args);
-    const p = merge(apiParams, params, extraParams);
+  const execute = (params, onSuccess, onError) => {
+    const p = merge(apiParams, defaultParams, params);
     fetch({ params: p })
       .then(({ data }) => {
         if (data?.success && onSuccess) {
@@ -45,8 +27,8 @@ export function usePost(endpoint, params) {
   };
 
   // Return data in error/success object as complement to the callbacks.
-  const error = requestError || data?.error ? data : null;
-  const success = data?.success ? data : null;
+  const error = response.error || response.data?.error ? response.data : null;
+  const success = response.data?.success ? response.data : null;
 
-  return [{ error, submitting: loading, success }, execute];
+  return [{ error, submitting: response.loading, success }, execute];
 }
