@@ -12,7 +12,12 @@ export default function AssetsLoader({ children, fonts, images }) {
     const cacheImages = images.map((image) =>
       Asset.fromModule(image).downloadAsync()
     );
-    const cacheFonts = Font.loadAsync(fonts);
+    // Make all fonts case insensitive when using them.
+    const lowerCaseFonts = Object.keys(fonts).reduce((obj, key) => {
+      obj[key?.toLowerCase()] = fonts[key];
+      return obj;
+    }, {});
+    const cacheFonts = Font.loadAsync(lowerCaseFonts);
     return Promise.all([...cacheImages, cacheFonts]);
   };
 

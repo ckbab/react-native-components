@@ -7,6 +7,7 @@ export default function Text({
   bold,
   children,
   color,
+  font,
   italic,
   numberOfLines,
   onPress,
@@ -32,14 +33,18 @@ export default function Text({
   };
 
   const getFontFamily = () => {
-    if (bold && italic) {
-      return "boldItalic";
-    } else if (bold) {
-      return "bold";
-    } else if (italic) {
-      return "italic";
+    const suffix =
+      bold && italic
+        ? "bolditalic"
+        : bold
+        ? "bold"
+        : italic
+        ? "italic"
+        : "regular";
+    if (font) {
+      return `${font}-${suffix}`.toLowerCase();
     }
-    return "regular";
+    return suffix;
   };
 
   const fontSize = getFontSize();
@@ -62,6 +67,7 @@ Text.propTypes = {
   bold: PropTypes.bool,
   children: PropTypes.any,
   color: PropTypes.string,
+  font: PropTypes.string,
   italic: PropTypes.bool,
   numberOfLines: PropTypes.number,
   onPress: PropTypes.func,
@@ -74,6 +80,7 @@ Text.defaultProps = {
   bold: false,
   children: null,
   color: "", // Default is font color from the theme.
+  font: "",
   italic: false,
   numberOfLines: null,
   onPress: null,
