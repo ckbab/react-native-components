@@ -29,11 +29,15 @@ export function useServer(endpoint, defaultOptions) {
     })
       .then((response) => {
         setData(response?.data);
-        onSuccess && onSuccess();
+        if (response?.data?.error) {
+          throw Error();
+        } else if (onSuccess) {
+          onSuccess(response?.data);
+        }
       })
-      .catch(() => {
+      .catch((error) => {
         message.error();
-        onError && onError();
+        onError && onError(error);
       })
       .finally(() => {
         setLoading(false);

@@ -40,7 +40,7 @@ export default function Button({
       onPressOut={onPressOut}
     >
       <Animated.View
-        style={[style, disabled && styles.disabled, { transform: [{ scale }] }]}
+        style={[disabled && styles.disabled, { transform: [{ scale }] }, style]}
       >
         {children}
       </Animated.View>
