@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import "moment/locale/en-gb";
 import "moment/locale/sv";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import stringInject from "stringinject";
 import { mergeDeep } from "timm";
 import { useTheme } from "../components/AppContainer/ThemeProvider";
@@ -20,21 +20,19 @@ const SvCountries = require("localized-countries")(
   require("localized-countries/data/sv")
 );
 
-const availableCountries = { en: EnCountries, sv: SvCountries };
-const availableLabels = { en: EnLabels, sv: SvLabels };
-
 export function useLocalization() {
-  const [countries, setCountries] = useState({});
-  const [labels, setLabels] = useState({});
   const { language, languages } = useTheme();
 
-  useEffect(() => {
-    // Create label dictionary.
+  // Create label dictionary.
+  const labels = useMemo(() => {
+    const availableLabels = { en: EnLabels, sv: SvLabels };
     const allLabels = mergeDeep(availableLabels, languages || {});
-    setLabels(allLabels[language] || {});
-    // Create country dictionary.
-    setCountries(availableCountries[language]?.object());
+    return allLabels[language] || {};
   }, [language, languages]);
+
+  // Create country dictionary.
+  const availableCountries = { en: EnCountries, sv: SvCountries };
+  const countries = availableCountries[language]?.object();
 
   const date = (date, parseFormat) => {
     const d = moment(date, parseFormat);
