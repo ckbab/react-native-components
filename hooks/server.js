@@ -30,7 +30,7 @@ export function useServer(endpoint, defaultOptions) {
       .then((response) => {
         setData(response?.data);
         if (response?.data?.error) {
-          throw Error();
+          throw response?.data;
         } else if (onSuccess) {
           onSuccess(response?.data);
         }

@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import PropTypes from "prop-types";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -36,6 +37,7 @@ export default function AppContainer({
           >
             <View style={styles.container}>{children}</View>
             <MessageContainer />
+            <StatusBar translucent />
           </ThemeProvider>
         </StoreProvider>
       </ExpoLoader>
