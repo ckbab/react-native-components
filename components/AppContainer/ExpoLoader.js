@@ -3,8 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, AppState, StyleSheet, View } from "react-native";
 import { useLocalization } from "../../hooks";
 import Text from "../Text/Text";
+import { useTheme } from "./ThemeProvider";
 
 export default function ExpoLoader({ children }) {
+  const { colors } = useTheme();
   const { localize } = useLocalization();
   const appState = useRef(AppState.currentState);
   const [loaded, setLoaded] = useState(false);
@@ -57,7 +59,7 @@ export default function ExpoLoader({ children }) {
 
   if (!loaded) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: colors?.background }]}>
         <Text style={styles.text} size="large" bold>
           {text}
         </Text>
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "red",
   },
   text: {
     marginBottom: 32,
