@@ -1,61 +1,45 @@
-import Lottie from "lottie-react-native";
+import { changeColor } from "@ckbab/js-utils";
 import PropTypes from "prop-types";
-import React, { useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
-import LoaderDark from "./loader-dark.json";
-import LoaderLight from "./loader-light.json";
+import React from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useTheme } from "../AppContainer/ThemeProvider";
+import Text from "../Text/Text";
 
-export default function Loader({ style, type }) {
-  const lottieRef = useRef(null);
-
-  useEffect(() => {
-    if (lottieRef.current) {
-      lottieRef.current.reset();
-      lottieRef.current.play();
-    }
-  }, []);
-
-  const getSource = () => {
-    if (type === "light") {
-      return LoaderLight;
-    } else if (type === "dark") {
-      return LoaderDark;
-    }
-    return null;
-  };
-
-  const source = getSource();
-
-  if (!source) {
-    return null;
-  }
-
+export default function Loader({ color, label, style }) {
+  const { colors } = useTheme();
+  const loaderColor = changeColor(color || colors.font, "#fff", 0.5);
+  const fontColor = color || colors.font;
   return (
     <View style={[styles.container, style]}>
-      <View style={styles.content}>
-        <Lottie ref={lottieRef} source={source} />
-      </View>
+      <ActivityIndicator size="large" color={loaderColor} />
+      {!!label && (
+        <Text style={styles.label} size="large" color={fontColor}>
+          {label}
+        </Text>
+      )}
     </View>
   );
 }
 
 Loader.propTypes = {
+  color: PropTypes.string,
+  label: PropTypes.string,
   style: PropTypes.any,
-  type: PropTypes.oneOf(["dark", "light"]),
 };
 
 Loader.defaultProps = {
+  color: "",
+  label: "",
   style: {},
-  type: "dark",
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 32,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
-  content: {
-    width: 128,
-    height: 128,
+  label: {
+    marginLeft: 16,
   },
 });

@@ -18,7 +18,6 @@
     "expo-status-bar": "^1.2.0",
     "expo-updates": "^0.11.6",
     "localized-countries": "^2.0.0",
-    "lottie-react-native": "^5.0.1",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
     "react-native-flash-message": "^0.2.1",
