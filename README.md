@@ -101,13 +101,12 @@ import { textShadow } from "@ckbab/react-native-components/styles";
 ## Hooks
 
 - `useDialog`
-- `useFetch`
 - `useLocalization`
 - `useMessage`
 - `useNavigator`
-- `usePost`
 - `usePushToken`
 - `useScreen`
+- `useServer`
 
 ## Styles
 
