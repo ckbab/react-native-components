@@ -30,9 +30,9 @@
     "timm": "^1.7.1"
   },
   "peerDependencies": {
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-native": "0.64.3"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-native": "^0.64.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
