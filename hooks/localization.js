@@ -32,7 +32,7 @@ export function useLocalization() {
 
   // Create country dictionary.
   const availableCountries = { en: EnCountries, sv: SvCountries };
-  const countries = availableCountries[language]?.object();
+  const allCountries = availableCountries[language]?.object();
 
   const date = (date, parseFormat) => {
     const d = moment(date, parseFormat);
@@ -41,7 +41,11 @@ export function useLocalization() {
 
   const country = (code) => {
     const countryCode = code?.toString()?.toUpperCase();
-    return countries[countryCode];
+    return allCountries[countryCode];
+  };
+
+  const countries = () => {
+    return allCountries;
   };
 
   const translate = (key, arr) => {
@@ -53,5 +57,5 @@ export function useLocalization() {
     }
   };
 
-  return { date, country, translate };
+  return { date, countries, country, translate };
 }
