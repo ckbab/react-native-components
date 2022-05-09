@@ -1,14 +1,25 @@
-import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import React, { useState } from "react";
-import { View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useCallback, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 export default function AssetsLoader({ children, fonts, images }) {
-  const [assetsLoaded, setAssetsLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
 
-  const startAsync = async () => {
+  useEffect(() => {
+    const prepare = async () => {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await loadAssets();
+      } finally {
+        setAppIsReady(true);
+      }
+    };
+    prepare();
+  }, []);
+
+  const loadAssets = async () => {
     const cacheImages = images.map((image) =>
       Asset.fromModule(image).downloadAsync()
     );
@@ -21,19 +32,26 @@ export default function AssetsLoader({ children, fonts, images }) {
     return Promise.all([...cacheImages, cacheFonts]);
   };
 
-  if (error) {
-    return <View />;
+  const onLayout = useCallback(async () => {
+    if (appIsReady) {
+      // Hide splash screen when view has been rendered.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
-  if (!assetsLoaded) {
-    return (
-      <AppLoading
-        startAsync={startAsync}
-        onFinish={() => setAssetsLoaded(true)}
-        onError={() => setError(true)}
-      />
-    );
-  }
-
-  return children;
+  return (
+    <View style={styles.container} onLayout={onLayout}>
+      {children}
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

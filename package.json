@@ -1,7 +1,7 @@
 {
   "name": "@ckbab/react-native-components",
   "description": "Usuable React Native components",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "main": "index.js",
   "dependencies": {
     "@ckbab/js-utils": "^1.0.0",
@@ -9,12 +9,12 @@
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.26.1",
     "axios-hooks": "^3.0.1",
-    "expo-app-loading": "^1.3.0",
     "expo-application": "^4.0.2",
     "expo-asset": "^8.4.6",
     "expo-constants": "^13.0.2",
     "expo-font": "^10.0.5",
     "expo-notifications": "^0.14.1",
+    "expo-splash-screen": "^0.15.1",
     "expo-status-bar": "^1.2.0",
     "expo-updates": "^0.11.6",
     "localized-countries": "^2.0.0",
