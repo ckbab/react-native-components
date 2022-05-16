@@ -1,7 +1,7 @@
 {
   "name": "@ckbab/react-native-components",
   "description": "Usuable React Native components",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "index.js",
   "dependencies": {
     "@ckbab/js-utils": "^1.0.0",
@@ -30,9 +30,11 @@
     "timm": "^1.7.1"
   },
   "peerDependencies": {
+    "@react-native-async-storage/async-storage": ">=1.17.4",
     "react": ">=17.0.1",
     "react-dom": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.64.3",
+    "react-native-svg": ">=12.3.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",

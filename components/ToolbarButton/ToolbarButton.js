@@ -8,8 +8,10 @@ import Icon from "../Icon/Icon";
 import Text from "../Text/Text";
 
 export default function ToolbarButton({
+  color: propsColor,
   disabled,
   icon,
+  iconType,
   label,
   loading,
   onPress,
@@ -17,7 +19,8 @@ export default function ToolbarButton({
 }) {
   const { colors } = useTheme();
 
-  const color = getContrastColor(colors?.background, colors?.primary, "#fff");
+  const color =
+    propsColor || getContrastColor(colors?.background, colors?.primary, "#fff");
 
   if (loading) {
     return (
@@ -34,7 +37,7 @@ export default function ToolbarButton({
       disabled={disabled}
     >
       {icon ? (
-        <Icon name={icon} size={24} color={color} />
+        <Icon name={icon} type={iconType} size={24} color={color} />
       ) : (
         <Text style={[styles.label, { color }]}>{label}</Text>
       )}
@@ -43,8 +46,10 @@ export default function ToolbarButton({
 }
 
 ToolbarButton.propTypes = {
+  color: PropTypes.string,
   disabled: PropTypes.bool,
   icon: PropTypes.string,
+  iconType: PropTypes.oneOf(["cartoon", "fa", "ion"]),
   label: PropTypes.string,
   loading: PropTypes.bool,
   onPress: PropTypes.func,
@@ -52,8 +57,10 @@ ToolbarButton.propTypes = {
 };
 
 ToolbarButton.defaultProps = {
+  color: "",
   disabled: false,
   icon: null,
+  iconType: "fa",
   label: "",
   loading: false,
   onPress: null,

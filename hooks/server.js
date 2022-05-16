@@ -22,9 +22,11 @@ export function useServer(endpoint, defaultOptions) {
       setData(null);
     }
     const prefix = defaultOptions?.isPost ? "post" : "get";
+    const url = endpoint?.includes("http")
+      ? endpoint
+      : `${apiUrl}/${prefix}/${endpoint}.php`;
     axios({
-      baseURL: apiUrl,
-      url: `${prefix}/${endpoint}.php`,
+      url: url,
       params: merge(apiParams, defaultOptions?.params, options?.params),
     })
       .then((response) => {
