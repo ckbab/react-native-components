@@ -103,7 +103,6 @@ import { textShadow } from "@ckbab/react-native-components/styles";
 - `useDialog`
 - `useLocalization`
 - `useMessage`
-- `useNavigator`
 - `usePushToken`
 - `useScreen`
 - `useServer`
