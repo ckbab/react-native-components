@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Text from "../Text/Text";
+import { StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../AppContainer/ThemeProvider";
 
 export default function InfoItem({ label, value }) {
+  const { style } = useTheme();
   const [showAll, setShowAll] = useState(false);
 
   const onToggle = () => {
@@ -24,8 +25,13 @@ export default function InfoItem({ label, value }) {
 
   return (
     <View style={styles.item}>
-      <Text bold>{label}</Text>
-      <Text style={styles.value} onPress={onToggle}>
+      <Text style={[styles.title, { fontFamily: style?.fonts?.bold || null }]}>
+        {label}
+      </Text>
+      <Text
+        style={[styles.value, { fontFamily: style?.fonts?.regular || null }]}
+        onPress={onToggle}
+      >
         {getValue()}
       </Text>
     </View>
@@ -34,9 +40,13 @@ export default function InfoItem({ label, value }) {
 
 const styles = StyleSheet.create({
   item: {
-    margin: 8,
+    margin: 12,
+  },
+  title: {
+    fontSize: 16,
   },
   value: {
-    marginTop: 4,
+    fontSize: 16,
+    marginTop: 8,
   },
 });

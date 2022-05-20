@@ -4,7 +4,7 @@ import { useTheme } from "../components/AppContainer/ThemeProvider";
 import { useLocalization } from "./localization";
 
 export function useMessage() {
-  const { colors } = useTheme();
+  const { style } = useTheme();
   const localization = useLocalization();
 
   const success = (title, subtitle) => {
@@ -12,8 +12,8 @@ export function useMessage() {
       message: title,
       description: subtitle,
       duration: 4000,
-      color: getContrastColor(colors?.success),
-      backgroundColor: colors?.success,
+      color: getContrastColor(style?.colors?.success),
+      backgroundColor: style?.colors?.success,
     });
   };
 
@@ -22,8 +22,8 @@ export function useMessage() {
       message: title || localization.translate("message.error.title"),
       description: subtitle,
       duration: 4000,
-      color: getContrastColor(colors?.error),
-      backgroundColor: colors?.error,
+      color: getContrastColor(style?.colors?.error),
+      backgroundColor: style?.colors?.error,
     });
   };
 

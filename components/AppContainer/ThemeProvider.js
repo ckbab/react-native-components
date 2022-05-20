@@ -12,9 +12,9 @@ export default function ThemeProvider({
   apiUrl,
   apiParamsSelector,
   children,
-  colors,
   languages,
   languageSelector,
+  style,
 }) {
   // Convert the selectors to real value here so the context contain real values
   // and not the functions.
@@ -22,7 +22,7 @@ export default function ThemeProvider({
   const language = useSelector(languageSelector);
   return (
     <ThemeContext.Provider
-      value={{ apiUrl, apiParams, colors, language, languages }}
+      value={{ apiUrl, apiParams, language, languages, style }}
     >
       {children}
     </ThemeContext.Provider>

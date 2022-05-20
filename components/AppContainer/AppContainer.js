@@ -12,13 +12,13 @@ export default function AppContainer({
   apiUrl,
   apiParamsSelector,
   children,
-  colors,
   fonts,
   images,
   languages,
   languageSelector,
   reducers,
   reducersTemp,
+  style,
 }) {
   // Pass colors, language and languages to the ThemeProvider so the props can
   // be accessible by child components such as color/font for Text etc.
@@ -31,9 +31,9 @@ export default function AppContainer({
           <ThemeProvider
             apiUrl={apiUrl}
             apiParamsSelector={apiParamsSelector}
-            colors={colors}
             languages={languages}
             languageSelector={languageSelector}
+            style={style}
           >
             <View style={styles.container}>{children}</View>
             <MessageContainer />
@@ -49,19 +49,7 @@ AppContainer.propTypes = {
   apiUrl: PropTypes.string,
   apiParamsSelector: PropTypes.func,
   children: PropTypes.any,
-  colors: PropTypes.shape({
-    background: PropTypes.string,
-    error: PropTypes.string,
-    font: PropTypes.string,
-    primary: PropTypes.string,
-    success: PropTypes.string,
-  }),
-  fonts: PropTypes.shape({
-    bold: PropTypes.any,
-    boldItalic: PropTypes.any,
-    italic: PropTypes.any,
-    regular: PropTypes.any,
-  }),
+  fonts: PropTypes.object,
   images: PropTypes.arrayOf(PropTypes.any),
   languages: PropTypes.shape({
     en: PropTypes.object,
@@ -70,19 +58,23 @@ AppContainer.propTypes = {
   languageSelector: PropTypes.func,
   reducers: PropTypes.object,
   reducersTemp: PropTypes.object,
+  style: PropTypes.shape({
+    fonts: PropTypes.shape({
+      regular: PropTypes.string,
+      bold: PropTypes.string,
+    }),
+    colors: PropTypes.shape({
+      background: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string,
+    }),
+  }),
 };
 
 AppContainer.defaultProps = {
   apiUrl: "",
   apiParamsSelector: null,
   children: null,
-  colors: {
-    background: "#eee",
-    error: "#ff0000",
-    font: "#000000",
-    primary: "#0000ff",
-    success: "#00ff00",
-  },
   fonts: {},
   images: [],
   languages: {
@@ -92,6 +84,17 @@ AppContainer.defaultProps = {
   languageSelector: null,
   reducers: {},
   reducersTemp: {},
+  style: {
+    fonts: {
+      regular: "Arial",
+      bold: "Impact",
+    },
+    colors: {
+      backgroundColor: "#ffffff",
+      error: "#ff0000",
+      success: "#00ff00",
+    },
+  },
 };
 
 const styles = StyleSheet.create({

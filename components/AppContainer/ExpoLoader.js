@@ -1,12 +1,17 @@
 import * as Updates from "expo-updates";
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, AppState, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  AppState,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useLocalization } from "../../hooks";
-import Text from "../Text/Text";
 import { useTheme } from "./ThemeProvider";
 
 export default function ExpoLoader({ children }) {
-  const { colors } = useTheme();
+  const { style } = useTheme();
   const { localize } = useLocalization();
   const appState = useRef(AppState.currentState);
   const [loaded, setLoaded] = useState(false);
@@ -59,8 +64,15 @@ export default function ExpoLoader({ children }) {
 
   if (!loaded) {
     return (
-      <View style={[styles.container, { backgroundColor: colors?.background }]}>
-        <Text style={styles.text} size="large" bold>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: style?.colors?.background },
+        ]}
+      >
+        <Text
+          style={[styles.text, { fontFamily: style?.fonts?.regular || null }]}
+        >
           {text}
         </Text>
         <ActivityIndicator size="large" />
@@ -79,5 +91,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginBottom: 32,
+    fontSize: 24,
   },
 });
