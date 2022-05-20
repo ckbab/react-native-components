@@ -84,19 +84,10 @@ import { textShadow } from "@ckbab/react-native-components/styles";
 ## Components
 
 - `AppContainer`
-- `Button`
 - `DevButton`
 - `DevInfo`
-- `Dialog`
 - `Flag`
-- `FlatButton`
 - `Icon`
-- `Loader`
-- `Modal`
-- `Screen`
-- `Text`
-- `TextInput`
-- `ToolbarButton`
 
 ## Hooks
 
