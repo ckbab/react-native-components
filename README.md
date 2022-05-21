@@ -15,41 +15,55 @@ First you need to wrap your app's main component with `AppContainer` and load wi
 ```js
 import { AppContainer } from "@ckbab/react-native-components";
 import settings from "./store/settings";
-import user from "./store/ui";
+import ui from "./store/ui";
 import user from "./store/user";
 ...
 
 const fonts = {
-  bold: require("../../../assets/fonts/RobotoCondensed-Regular.ttf"),
-  boldItalic: require("../../../assets/fonts/RobotoCondensed-Italic.ttf"),
-  ...
-  "Arsenal-Bold": require("../../../assets/fonts/Arsenal-Bold.ttf"),
+  "Roboto": require("../../../assets/fonts/RobotoCondensed-Regular.ttf"),
+  "Roboto Italic": require("../../../assets/fonts/RobotoCondensed-Italic.ttf"),
+  "Arsenal Bold": require("../../../assets/fonts/Arsenal-Bold.ttf"),
   ...
 };
+
+const images = [require("./images/logo.png"), ...];
 
 const english = { hello: "Hello" };
 const swedish = { hello: "Hej" };
 
-const images = [require("./images/logo.png"), ...];
-
 <AppContainer
-  apiUrl={apiUrl}
-  apiParamsSelector={(state) => ({
-    apiToken: state?.user?.apiToken,
-    userId: state?.user?.userId,
-    ...
-  })}
-  colors={{
-    background: backgroundColor,
-    error: errorColor,
-    ...
+  api={{
+    baseUrl: "https://ckbab.se/project/api",
+    paramsSelector: (state) => ({
+      apiToken: state?.user?.apiToken,
+      userId: state?.user?.userId,
+      ...
+    }),
   }}
-  fonts={fonts}
-  languages={{ en: english, sv: swedish, ... }}
-  languageSelector={(state) => state?.settings?.language}
-  images={images}
-  reducers={{ settings, user, ... }}
-  reducersTemp={{ ui, ... }}
+  language={{
+    en: english,
+    sv: swedish,
+    selector: (state) => state?.settings?.language,
+  }}
+  load={{
+    fonts: fonts,
+    images: images,
+  }}
+  reducers={{
+    blacklist: { ui },
+    whitelist: { settings, user, ... }
+  }}
+  style={{
+    colors: {
+      background: "#eeeeee",
+      error: "#ff0000",
+      success: "#006600",
+    },
+    fonts: {
+      regular: "Roboto",
+      bold: "Arsenal Bold",
+    },
+  }}
 >
   /* Main app component */
 </AppContainer>
