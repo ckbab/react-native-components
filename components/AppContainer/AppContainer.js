@@ -9,15 +9,11 @@ import StoreProvider from "./StoreProvider";
 import ThemeProvider from "./ThemeProvider";
 
 export default function AppContainer({
-  apiUrl,
-  apiParamsSelector,
+  api,
   children,
-  fonts,
-  images,
-  languages,
-  languageSelector,
+  language,
+  load,
   reducers,
-  reducersTemp,
   style,
 }) {
   // Pass colors, language and languages to the ThemeProvider so the props can
@@ -25,14 +21,17 @@ export default function AppContainer({
   // Note that AssetsLoader needs to be loaded first since fonts might be used
   // in ExpoLoader.
   return (
-    <AssetsLoader fonts={fonts} images={images}>
+    <AssetsLoader fonts={load?.fonts} images={load?.images}>
       <ExpoLoader>
-        <StoreProvider reducers={reducers} reducersTemp={reducersTemp}>
+        <StoreProvider
+          reducers={reducers?.whitelist}
+          reducersTemp={reducers?.blacklist}
+        >
           <ThemeProvider
-            apiUrl={apiUrl}
-            apiParamsSelector={apiParamsSelector}
-            languages={languages}
-            languageSelector={languageSelector}
+            apiUrl={api?.baseUrl}
+            apiParamsSelector={api?.paramsSelector}
+            languages={{ en: language?.en, sv: language?.sv }}
+            languageSelector={language?.selector}
             style={style}
           >
             <View style={styles.container}>{children}</View>
@@ -46,18 +45,24 @@ export default function AppContainer({
 }
 
 AppContainer.propTypes = {
-  apiUrl: PropTypes.string,
-  apiParamsSelector: PropTypes.func,
+  api: PropTypes.shape({
+    baseUrl: PropTypes.string,
+    paramsSelector: PropTypes.func,
+  }),
   children: PropTypes.any,
-  fonts: PropTypes.object,
-  images: PropTypes.arrayOf(PropTypes.any),
-  languages: PropTypes.shape({
+  language: PropTypes.shape({
     en: PropTypes.object,
     sv: PropTypes.object,
+    selector: PropTypes.func,
   }),
-  languageSelector: PropTypes.func,
-  reducers: PropTypes.object,
-  reducersTemp: PropTypes.object,
+  load: PropTypes.shape({
+    fonts: PropTypes.object,
+    images: PropTypes.arrayOf(PropTypes.any),
+  }),
+  reducers: PropTypes.shape({
+    blacklist: PropTypes.object,
+    whitelist: PropTypes.object,
+  }),
   style: PropTypes.shape({
     fonts: PropTypes.shape({
       regular: PropTypes.string,
@@ -72,18 +77,24 @@ AppContainer.propTypes = {
 };
 
 AppContainer.defaultProps = {
-  apiUrl: "",
-  apiParamsSelector: null,
+  api: PropTypes.shape({
+    baseUrl: "",
+    paramsSelector: null,
+  }),
   children: null,
-  fonts: {},
-  images: [],
-  languages: {
+  language: PropTypes.shape({
     en: {},
     sv: {},
-  },
-  languageSelector: null,
-  reducers: {},
-  reducersTemp: {},
+    selector: null,
+  }),
+  load: PropTypes.shape({
+    fonts: {},
+    images: [],
+  }),
+  reducers: PropTypes.shape({
+    blacklist: {},
+    whitelist: {},
+  }),
   style: {
     fonts: {
       regular: "Arial",
