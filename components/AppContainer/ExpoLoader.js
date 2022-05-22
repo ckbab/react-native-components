@@ -21,22 +21,15 @@ export default function ExpoLoader({ children }) {
   useEffect(() => {
     const checkForUpdate = async () => {
       try {
-        const { isAvailable } = await Updates.checkForUpdateAsync();
-        if (isAvailable) {
+        const update = await Updates.checkForUpdateAsync();
+        if (update?.isAvailable) {
           setText(localize("appContainer.loading"));
-          const { isNew } = Updates.fetchUpdateAsync();
-          if (isNew) {
-            Updates.reloadAsync();
-          } else {
-            // Update "available" but not "new". Should not happen though.
-            setLoaded(true);
-          }
+          await Updates.fetchUpdateAsync();
+          Updates.reloadAsync();
         } else {
-          // No update available.
           setLoaded(true);
         }
       } catch (e) {
-        // Error occured... e.g. when checking in dev mode.
         setLoaded(true);
       }
     };
