@@ -16,31 +16,33 @@ export default function AppContainer({
   reducers,
   style,
 }) {
-  // ThemeProvider should be rendered first since e.g. ExpoLoader is language
-  // labels provided by the theme.
-  // Also note that AssetsLoader needs to be loaded second since fonts etc is
-  // used in ExpoLoader.
+  // StoreProvider needs to be initiated before ThemeProvider since the latter
+  // is using selectors.
+  // ThemeProvider needs to be initiated before ExpoLoader since the latter is
+  // using language labels provided by the theme.
+  // AssetsLoader needs to be initiated before ExpoLoader since the latter is
+  // using fonts (loaded by AssetsLoader).
   return (
-    <ThemeProvider
-      apiUrl={api?.baseUrl}
-      apiParamsSelector={api?.paramsSelector}
-      languages={{ en: language?.en, sv: language?.sv }}
-      languageSelector={language?.selector}
-      style={style}
+    <StoreProvider
+      reducers={reducers?.whitelist}
+      reducersTemp={reducers?.blacklist}
     >
-      <AssetsLoader fonts={load?.fonts} images={load?.images}>
-        <ExpoLoader>
-          <StoreProvider
-            reducers={reducers?.whitelist}
-            reducersTemp={reducers?.blacklist}
-          >
+      <ThemeProvider
+        apiUrl={api?.baseUrl}
+        apiParamsSelector={api?.paramsSelector}
+        languages={{ en: language?.en, sv: language?.sv }}
+        languageSelector={language?.selector}
+        style={style}
+      >
+        <AssetsLoader fonts={load?.fonts} images={load?.images}>
+          <ExpoLoader>
             <View style={styles.container}>{children}</View>
             <MessageContainer />
             <StatusBar translucent />
-          </StoreProvider>
-        </ExpoLoader>
-      </AssetsLoader>
-    </ThemeProvider>
+          </ExpoLoader>
+        </AssetsLoader>
+      </ThemeProvider>
+    </StoreProvider>
   );
 }
 
