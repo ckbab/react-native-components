@@ -7,25 +7,40 @@ import {
   Text,
   View,
 } from "react-native";
-import { useLocalization } from "../../hooks";
+import { useDialog, useLocalization } from "../../hooks";
 import { useTheme } from "./ThemeProvider";
 
 export default function ExpoLoader({ children }) {
   const { style } = useTheme();
-  const { localize } = useLocalization();
+  const { confirm } = useDialog();
+  const { translate } = useLocalization();
   const appState = useRef(AppState.currentState);
   const [loaded, setLoaded] = useState(false);
   // Empty string so ActivityIndicator is not moved when text appears.
   const [text, setText] = useState(" ");
 
   useEffect(() => {
-    const checkForUpdate = async () => {
+    const checkForUpdate = async (askBeforeUpdate) => {
       try {
         const update = await Updates.checkForUpdateAsync();
         if (update?.isAvailable) {
-          setText(localize("appContainer.loading"));
-          await Updates.fetchUpdateAsync();
-          Updates.reloadAsync();
+          const update = async () => {
+            setLoaded(false);
+            setText(translate("appContainer.loading"));
+            await Updates.fetchUpdateAsync();
+            Updates.reloadAsync();
+          };
+          // If function called when user has resumed the app - first ask if he
+          // wants to update app now before updating app.
+          if (askBeforeUpdate) {
+            const accept = await confirm(translate("appContainer.confirm"));
+            if (accept) {
+              update();
+            }
+          } else {
+            // Update the app directly - should happen only on app start.
+            update();
+          }
         } else {
           setLoaded(true);
         }
@@ -44,7 +59,7 @@ export default function ExpoLoader({ children }) {
         nextAppState === "active"
       ) {
         if (!__DEV__) {
-          checkForUpdate();
+          checkForUpdate(true);
         }
       }
       appState.current = nextAppState;

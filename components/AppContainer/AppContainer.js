@@ -16,31 +16,31 @@ export default function AppContainer({
   reducers,
   style,
 }) {
-  // Pass colors, language and languages to the ThemeProvider so the props can
-  // be accessible by child components such as color/font for Text etc.
-  // Note that AssetsLoader needs to be loaded first since fonts might be used
-  // in ExpoLoader.
+  // ThemeProvider should be rendered first since e.g. ExpoLoader is language
+  // labels provided by the theme.
+  // Also note that AssetsLoader needs to be loaded second since fonts etc is
+  // used in ExpoLoader.
   return (
-    <AssetsLoader fonts={load?.fonts} images={load?.images}>
-      <ExpoLoader>
-        <StoreProvider
-          reducers={reducers?.whitelist}
-          reducersTemp={reducers?.blacklist}
-        >
-          <ThemeProvider
-            apiUrl={api?.baseUrl}
-            apiParamsSelector={api?.paramsSelector}
-            languages={{ en: language?.en, sv: language?.sv }}
-            languageSelector={language?.selector}
-            style={style}
+    <ThemeProvider
+      apiUrl={api?.baseUrl}
+      apiParamsSelector={api?.paramsSelector}
+      languages={{ en: language?.en, sv: language?.sv }}
+      languageSelector={language?.selector}
+      style={style}
+    >
+      <AssetsLoader fonts={load?.fonts} images={load?.images}>
+        <ExpoLoader>
+          <StoreProvider
+            reducers={reducers?.whitelist}
+            reducersTemp={reducers?.blacklist}
           >
             <View style={styles.container}>{children}</View>
             <MessageContainer />
             <StatusBar translucent />
-          </ThemeProvider>
-        </StoreProvider>
-      </ExpoLoader>
-    </AssetsLoader>
+          </StoreProvider>
+        </ExpoLoader>
+      </AssetsLoader>
+    </ThemeProvider>
   );
 }
 

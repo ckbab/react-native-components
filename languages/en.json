@@ -1,7 +1,10 @@
 {
   "appContainer.loading": "Downloading latest version...",
+  "appContainer.confirm": "New update available. Download now?",
+
   "dialog.alert.ok": "OK",
   "dialog.confirm.no": "No",
   "dialog.confirm.yes": "Yes",
+
   "message.error.title": "Something went wrong"
 }

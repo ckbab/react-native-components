@@ -1,7 +1,10 @@
 {
   "appContainer.loading": "Laddar ner senaste versionen...",
+  "appContainer.confirm": "Ny uppdatering tillgänglig. Ladda hem nu?",
+
   "dialog.alert.ok": "OK",
   "dialog.confirm.no": "Nej",
   "dialog.confirm.yes": "Ja",
+
   "message.error.title": "Något gick fel"
 }
